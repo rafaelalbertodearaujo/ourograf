@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ação do Botão de WhatsApp no Lightbox
     if (lightboxWaBtn) {
         lightboxWaBtn.addEventListener('click', () => {
-            const phone = '5549999609130';
+            const phone = '5549999473009';
             const msg = `Olá, Ourograf!\nVi o projeto no portfólio do site (*${currentProjectTitle}*) e gostaria de solicitar um orçamento similar para a minha empresa.`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         });
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const waButtons = document.querySelectorAll('.generate-wa');
-    const phone = '5549999609130';
+    const phone = '5549999473009';
 
     waButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {

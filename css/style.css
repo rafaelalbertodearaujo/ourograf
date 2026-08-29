@@ -1391,8 +1391,52 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .quote-builder {
+        border-radius: var(--radius-md);
+        margin: 0;
+        width: 100%;
+    }
+
+    .tab-btn {
+        padding: 0.85rem 0.2rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .tab-content {
+        padding: 1.15rem 0.75rem;
+    }
+
+    .quote-mode-selector {
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.3rem;
+    }
+
+    .mode-radio span {
+        min-height: 40px;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.84rem;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
+        gap: 0.65rem;
+    }
+
+    .input-group {
+        gap: 0.25rem;
+    }
+
+    .input-group label {
+        font-size: 0.8rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.88rem;
     }
 
     .section {
