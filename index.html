@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ourograf - Gráfica e Comunicação Visual Premium em Capinzal e região. Fachadas em ACM, luminosos, banners, adesivação de frotas e materiais gráficos de alto impacto.">
+    <title>Ourograf | Gráfica & Comunicação Visual Premium</title>
+    
+    <!-- Tipografia: Space Grotesk (Display) e Outfit (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header / Navbar com ScrollSpy -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#hero" class="brand-logo">OUROGRAF<span class="gold-dot">.</span></a>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="#hero" class="nav-link active">Início</a>
+                <a href="#especialidades" class="nav-link">Especialidades</a>
+                <a href="#portfolio" class="nav-link">Portfólio</a>
+                <a href="#diferenciais" class="nav-link">Diferenciais</a>
+                <a href="#orcamento" class="btn btn-outline nav-btn">Simular Orçamento</a>
+            </nav>
+
+            <button class="mobile-menu-toggle" id="mobile-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Seção 1: Hero com Canvas Interativo de Fora a Fora -->
+    <section class="hero" id="hero">
+        <!-- Canvas Dinâmico de Partículas & Linhas Douradas -->
+        <canvas id="hero-canvas" class="hero-canvas"></canvas>
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content reveal">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span>Comunicação Visual & Gráfica • Capinzal e Região</span>
+            </div>
+
+            <h1>Sua Marca em <span class="text-gold">Destaque Máximo.</span></h1>
+            
+            <p class="hero-desc">
+                Transformamos a fachada da sua empresa, frotas e pontos de venda em ferramentas poderosas de atração. Fachadas em ACM, letreiros luminosos, lonas de alta definição e adesivos sob medida.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#orcamento" class="btn btn-primary">
+                    <span>Simular Orçamento Rápido</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#portfolio" class="btn btn-secondary">Ver Projetos Reais</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-num text-gold">+10</span>
+                    <span class="stat-label">Anos de Experiência</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num text-gold">100%</span>
+                    <span class="stat-label">Projetos Sob Medida</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num text-gold">Agilidade</span>
+                    <span class="stat-label">Produção e Instalação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 2: Especialidades (Bento Box com Imagens Reais) -->
+    <section id="especialidades" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag">SERVIÇOS DE IMPACTO</span>
+                <h2>Nossas <span class="text-gold">Especialidades</span></h2>
+                <p>Estrutura completa e equipamentos de alta precisão para dar vida à sua identidade visual.</p>
+            </div>
+            
+            <div class="bento-grid">
+                <!-- Fachadas (Card Grande com Imagem) -->
+                <div class="bento-card card-large reveal" style="--card-bg-img: url('img/hero-facade.jpg');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-badge">Carro-Chefe</span>
+                        <h3>Fachadas em ACM & Luminosos</h3>
+                        <p>Painéis de alumínio composto, letras caixa 3D, neon LED e iluminação embutida de alto padrão arquitetônico.</p>
+                        <a href="#orcamento" class="card-link" onclick="selectTab('fachada')">Calcular Fachada &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Banners e Lonas -->
+                <div class="bento-card reveal" style="--card-bg-img: url('img/banners.jpg');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-badge">Alta Resolução</span>
+                        <h3>Lonas & Banners</h3>
+                        <p>Impressão digital UV e eco-solvente para eventos, outdoors, feiras e promoções de grande visibilidade.</p>
+                        <a href="#orcamento" class="card-link" onclick="selectTab('banner')">Orçar Banner &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Adesivos & Envelopamento -->
+                <div class="bento-card reveal" style="--card-bg-img: url('img/envelopamento.jpg');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-badge">Personalização</span>
+                        <h3>Adesivos & Frotas</h3>
+                        <p>Envelopamento profissional de veículos comerciais, vitrines, rótulos e vinis de alta durabilidade.</p>
+                        <a href="#orcamento" class="card-link" onclick="selectTab('adesivo')">Orçar Adesivo &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- Totens e Sinalização -->
+                <div class="bento-card card-wide reveal" style="--card-bg-img: url('img/totem-luminoso.jpg');">
+                    <div class="card-overlay"></div>
+                    <div class="card-content">
+                        <span class="card-badge">Sinalização Premium</span>
+                        <h3>Totens, Placas & Projetos Especiais</h3>
+                        <p>Sinalização corporativa interna e externa, totens rodoviários, placas em acrílico e projetos visuais 100% customizados.</p>
+                        <a href="#orcamento" class="card-link">Fazer Projeto Especial &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 3: Portfólio com Filtro e Lightbox Dinâmico -->
+    <section id="portfolio" class="section bg-darker">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-tag">GALERIA DE TRABALHOS</span>
+                <h2>Nosso <span class="text-gold">Portfólio</span></h2>
+                <p>Veja a qualidade dos acabamentos e materiais entregues aos nossos clientes.</p>
+            </div>
+
+            <!-- Filtros de Categoria -->
+            <div class="portfolio-filters reveal">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="fachada">Fachadas</button>
+                <button class="filter-btn" data-filter="adesivo">Adesivos & Frotas</button>
+                <button class="filter-btn" data-filter="banner">Banners</button>
+                <button class="filter-btn" data-filter="totem">Totens</button>
+            </div>
+
+            <!-- Grid de Itens do Portfólio -->
+            <div class="portfolio-grid">
+                <!-- Item 1: Fachada Joalheria -->
+                <div class="portfolio-item reveal" data-category="fachada" 
+                     data-title="Fachada Comercial em ACM com Letra Caixa LED"
+                     data-category-label="Fachadas & Luminosos"
+                     data-desc="Estrutura frontal em ACM preto fosco com iluminação perimetral e letras em acrílico 3D retroiluminadas."
+                     data-img="img/hero-facade.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/hero-facade.jpg" alt="Fachada Comercial em ACM" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Fachadas</span>
+                            <h4>Fachada Comercial ACM</h4>
+                            <p>Letra caixa 3D com iluminação LED</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Envelopamento Veicular -->
+                <div class="portfolio-item reveal" data-category="adesivo"
+                     data-title="Envelopamento Profissional de Frota Comercial"
+                     data-category-label="Adesivos & Envelopamento"
+                     data-desc="Adesivação total com vinil premium preto fosco e grafismos dourados em alta durabilidade para veículos de entrega."
+                     data-img="img/envelopamento.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/envelopamento.jpg" alt="Envelopamento de Frota Comercial" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Frotas</span>
+                            <h4>Envelopamento de Frota</h4>
+                            <p>Vinil fosco com detalhes dourados</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Banners de Evento -->
+                <div class="portfolio-item reveal" data-category="banner"
+                     data-title="Banners Roll-Up & Painel para Estande Corporativo"
+                     data-category-label="Lonas & Banners"
+                     data-desc="Impressão digital em lona fosca anti-reflexo com acabamento estruturado para feiras e congressos empresariais."
+                     data-img="img/banners.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/banners.jpg" alt="Banners Roll-Up para Estande" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Banners</span>
+                            <h4>Estande & Banners Roll-up</h4>
+                            <p>Impressão fotográfica de alta definição</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Adesivação de Vitrine -->
+                <div class="portfolio-item reveal" data-category="adesivo"
+                     data-title="Adesivação e Decoração de Vitrine Boutique"
+                     data-category-label="Adesivos & Vitrines"
+                     data-desc="Recorte eletrônico de vinil dourado metálico e jateado para vitrine de loja com máxima precisão e elegância."
+                     data-img="img/adesivos-vitrine.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/adesivos-vitrine.jpg" alt="Adesivação de Vitrine" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Vitrines</span>
+                            <h4>Decoração de Vitrine</h4>
+                            <p>Recorte eletrônico vinil dourado</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Totem Corporativo -->
+                <div class="portfolio-item reveal" data-category="totem"
+                     data-title="Totem Monumental Iluminado para Sede Corporativa"
+                     data-category-label="Totens & Sinalização"
+                     data-desc="Totem vertical de 4 metros em ACM gold escovado com iluminação indireta e logo vazado com backlighting."
+                     data-img="img/totem-luminoso.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/totem-luminoso.jpg" alt="Totem Iluminado Corporativo" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Totens</span>
+                            <h4>Totem Corporativo LED</h4>
+                            <p>ACM escovado com iluminação indireta</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: Fachada Noturna Iluminada -->
+                <div class="portfolio-item reveal" data-category="fachada"
+                     data-title="Fachada Arquitetônica Noturna com Painel Luminoso"
+                     data-category-label="Fachadas & Luminosos"
+                     data-desc="Solução integrada de comunicação noturna com lâmpadas LED de alta eficiência e letras em relevo."
+                     data-img="img/hero-facade.jpg">
+                    <div class="portfolio-thumb">
+                        <img src="img/hero-facade.jpg" alt="Fachada Noturna Iluminada" loading="lazy">
+                        <div class="portfolio-overlay">
+                            <span class="portfolio-tag">Fachadas</span>
+                            <h4>Luminoso Noturno Premium</h4>
+                            <p>Alta visibilidade e resistência climática</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 4: Diferenciais Ourograf -->
+    <section id="diferenciais" class="section">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-tag">COMPROMISSO COM A QUALIDADE</span>
+                <h2>Nossos <span class="text-gold">Diferenciais</span></h2>
+                <p>Entregamos mais do que materiais gráficos; entregamos durabilidade e impacto visual de alto nível.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <h3>Materiais Premium</h3>
+                    <p>Trabalhamos exclusivamente com vinis de alta performance, ACM de espessura superior e tintas UV originais que não desbotam ao sol.</p>
+                </div>
+
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    </div>
+                    <h3>Alta Durabilidade</h3>
+                    <p>Nossas fachadas e letreiros são estruturados para resistir a intempéries climáticas severas, mantendo a estética impecável por anos.</p>
+                </div>
+
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    </div>
+                    <h3>Instalação Especializada</h3>
+                    <p>Equipe própria e treinada, garantindo um acabamento perfeito, sem bolhas, sem rebarbas e respeitando a estrutura do seu imóvel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção 5: Simulador de Orçamento (Aba Interativa) -->
+    <section id="orcamento" class="section bg-darker">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <span class="section-tag">ATENDIMENTO ÁGIL</span>
+                <h2>Simulador de <span class="text-gold">Orçamento</span></h2>
+                <p>Preencha as medidas do que precisa e receba o retorno com agilidade no WhatsApp.</p>
+            </div>
+
+            <div class="quote-builder reveal">
+                <!-- Abas -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="fachada">Fachada</button>
+                    <button class="tab-btn" data-target="banner">Banner / Lona</button>
+                    <button class="tab-btn" data-target="adesivo">Adesivo</button>
+                </div>
+
+                <!-- Formulários Dinâmicos -->
+                <div class="tab-content active" id="fachada">
+                    <form class="quote-form" data-type="Fachada">
+                        <div class="quote-mode-selector">
+                            <label class="mode-radio">
+                                <input type="radio" name="fachada_modo" value="medidas" checked>
+                                <span>Tenho as Medidas</span>
+                            </label>
+                            <label class="mode-radio">
+                                <input type="radio" name="fachada_modo" value="visita">
+                                <span>Agendar Visita (Não sei as medidas)</span>
+                            </label>
+                        </div>
+                        <div class="form-section mode-medidas active">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Largura Estimada (Metros) *</label>
+                                    <input type="number" step="0.1" name="largura" placeholder="Ex: 5.0" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Altura Estimada (Metros) *</label>
+                                    <input type="number" step="0.1" name="altura" placeholder="Ex: 1.5" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section mode-visita" style="display: none;">
+                            <div class="input-group">
+                                <label>Endereço / Local para Visita Técnica *</label>
+                                <input type="text" name="endereco" placeholder="Ex: Rua Principal, 123 - Centro">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Tipo de Fachada</label>
+                            <select name="tipo">
+                                <option value="Painel em ACM com Letra Caixa">Painel em ACM com Letra Caixa</option>
+                                <option value="Painel em ACM Simples">Painel em ACM Simples</option>
+                                <option value="Lona com Estrutura Metálica">Lona com Estrutura Metálica</option>
+                                <option value="Letreiro Iluminado LED">Letreiro Iluminado LED</option>
+                                <option value="Não sei / Preciso de consultoria">Não sei / Preciso de consultoria</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Observações / Detalhes</label>
+                            <textarea name="obs" rows="3" placeholder="Ex: Loja no centro de Capinzal, preciso de iluminação noturna..."></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="tab-content" id="banner">
+                    <form class="quote-form" data-type="Banner/Lona">
+                        <div class="quote-mode-selector">
+                            <label class="mode-radio">
+                                <input type="radio" name="banner_modo" value="medidas" checked>
+                                <span>Medidas Exatas</span>
+                            </label>
+                            <label class="mode-radio">
+                                <input type="radio" name="banner_modo" value="padrao">
+                                <span>Ver Tamanhos Padrão</span>
+                            </label>
+                        </div>
+                        <div class="form-section mode-medidas active">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Largura (cm) *</label>
+                                    <input type="number" name="largura" placeholder="Ex: 120" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Altura (cm) *</label>
+                                    <input type="number" name="altura" placeholder="Ex: 90" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section mode-padrao" style="display: none;">
+                            <div class="input-group">
+                                <label>Tamanho Estimado</label>
+                                <select name="tamanho_padrao">
+                                    <option value="Pequeno (aprox. 90x60cm)">Banner Pequeno (aprox. 90x60cm) - Sob Consulta</option>
+                                    <option value="Médio (aprox. 120x90cm)">Banner Médio (aprox. 120x90cm) - Sob Consulta</option>
+                                    <option value="Grande (aprox. 200x120cm)">Banner Grande (aprox. 200x120cm) - Sob Consulta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Tipo de Acabamento</label>
+                            <select name="acabamento">
+                                <option value="Bainha e Ilhós metálicos">Bainha e Ilhós metálicos</option>
+                                <option value="Bastão de madeira com cordinha">Bastão de madeira com cordinha</option>
+                                <option value="Banner Roll-up com suporte">Banner Roll-up com suporte</option>
+                                <option value="Apenas refilado (sem acabamento)">Apenas refilado (sem acabamento)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Quantidade e Detalhes</label>
+                            <textarea name="obs" rows="2" placeholder="Ex: 2 unidades para evento..."></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="tab-content" id="adesivo">
+                    <form class="quote-form" data-type="Adesivo">
+                        <div class="quote-mode-selector">
+                            <label class="mode-radio">
+                                <input type="radio" name="adesivo_modo" value="medidas" checked>
+                                <span>Medidas Exatas</span>
+                            </label>
+                            <label class="mode-radio">
+                                <input type="radio" name="adesivo_modo" value="padrao">
+                                <span>Estimativa por m²</span>
+                            </label>
+                        </div>
+                        <div class="form-section mode-medidas active">
+                            <div class="form-row">
+                                <div class="input-group">
+                                    <label>Largura (cm) *</label>
+                                    <input type="number" name="largura" placeholder="Ex: 50" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Altura (cm) *</label>
+                                    <input type="number" name="altura" placeholder="Ex: 50" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-section mode-padrao" style="display: none;">
+                            <div class="input-group">
+                                <label>Quantidade Estimada</label>
+                                <select name="metro_quadrado">
+                                    <option value="Menos de 1m²">Pequeno Formato (Menos de 1m²) - Sob Consulta</option>
+                                    <option value="Até 5m²">Médio Formato (1 a 5m²) - Sob Consulta</option>
+                                    <option value="Mais de 5m²">Grande Formato (Mais de 5m²) - Sob Consulta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Finalidade da Aplicação</label>
+                            <select name="aplicacao">
+                                <option value="Vitrine de Loja / Vidro">Vitrine de Loja / Vidro</option>
+                                <option value="Envelopamento de Veículo / Carro">Envelopamento de Veículo / Carro</option>
+                                <option value="Rótulos / Etiquetas Personalizadas">Rótulos / Etiquetas Personalizadas</option>
+                                <option value="Parede / Sinalização Interna">Parede / Sinalização Interna</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Observações / Detalhes</label>
+                            <textarea name="obs" rows="2" placeholder="Ex: Recorte eletrônico no formato do logo..."></textarea>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Dinâmico Lightbox do Portfólio -->
+    <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true">
+        <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+        <div class="lightbox-dialog">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Fechar janela">&times;</button>
+            <div class="lightbox-media">
+                <img src="" alt="" id="lightbox-img">
+            </div>
+            <div class="lightbox-info">
+                <span class="lightbox-badge" id="lightbox-category">Fachadas</span>
+                <h3 id="lightbox-title">Título do Projeto</h3>
+                <p id="lightbox-desc">Descrição detalhada do projeto.</p>
+                <div class="lightbox-actions">
+                    <button type="button" class="btn btn-primary" id="lightbox-wa-btn">
+                        <span>Pedir Projeto Similar no WhatsApp</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3>OUROGRAF<span class="text-gold">.</span></h3>
+                <p>Excelência em Fachadas, Banners e Comunicação Visual em Capinzal, Ouro e Região - SC.</p>
+            </div>
+            <div class="footer-contact">
+                <p class="footer-label">Atendimento Direto:</p>
+                <a href="https://wa.me/5549999473009" target="_blank" class="whatsapp-link">
+                    <span>(49) 99947-3009</span>
+                </a>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Ourograf Gráfica e Comunicação Visual. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA Mobile -->
+    <div class="sticky-cta">
+        <a href="#orcamento" class="btn btn-primary btn-full">
+            <span>Fazer Orçamento no WhatsApp</span>
+        </a>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
