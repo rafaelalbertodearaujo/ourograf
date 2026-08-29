@@ -269,8 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ação do Botão de WhatsApp no Lightbox
     if (lightboxWaBtn) {
         lightboxWaBtn.addEventListener('click', () => {
-            const phone = '5549999473009';
-            const msg = `Ol\xE1, Ourograf! \uD83D\uDC4B\nVi o projeto no portf\xF3lio do site (*${currentProjectTitle}*) e gostaria de solicitar um or\xE7amento similar para a minha empresa. \uD83D\uDCCB`;
+            const phone = '5549999609130';
+            const msg = `Olá, Ourograf!\nVi o projeto no portfólio do site (*${currentProjectTitle}*) e gostaria de solicitar um orçamento similar para a minha empresa.`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         });
     }
@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const waButtons = document.querySelectorAll('.generate-wa');
-    const phone = '5549999473009';
+    const phone = '5549999609130';
 
     waButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -338,9 +338,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Verifica o modo atual escolhido
             const activeModeRadio = form.querySelector('.mode-radio input:checked');
-            const modeName = activeModeRadio ? activeModeRadio.nextElementSibling.textContent : '';
+            const modeName = activeModeRadio ? activeModeRadio.nextElementSibling.textContent.trim() : '';
             
-            let text = `Ol\xE1, Ourograf! \uD83D\uDC4B\nGostaria de solicitar um or\xE7amento para: *${productType}*\nModo: *${modeName}*\n\n`;
+            let text = `Olá, Ourograf!\nGostaria de solicitar um orçamento para: *${productType}*\nModo: *${modeName}*\n\n`;
 
             const inputs = form.querySelectorAll('input, select, textarea');
             let hasMissingImportant = false;
@@ -365,32 +365,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (val) {
                     let label = name.charAt(0).toUpperCase() + name.slice(1);
-                    if (name === 'obs') label = 'Observa\xE7\xF5es';
+                    if (name === 'obs') label = 'Observações';
                     if (name === 'tipo') label = 'Tipo de Fachada';
                     if (name === 'acabamento') label = 'Acabamento';
-                    if (name === 'aplicacao') label = 'Aplica\xE7\xE3o';
-                    if (name === 'endereco') label = 'Endere\xE7o para Visita';
+                    if (name === 'aplicacao') label = 'Aplicação';
+                    if (name === 'endereco') label = 'Endereço para Visita';
                     if (name === 'tamanho_padrao') label = 'Tamanho Estimado';
                     if (name === 'metro_quadrado') label = 'Área Estimada';
 
                     if (name === 'largura' || name === 'altura') {
                         const unit = input.placeholder.includes('Metros') ? 'm' : 'cm';
-                        text += `\u25B8 *${label}:* ${val} ${unit}\n`;
+                        text += `* ${label}: ${val} ${unit}\n`;
                     } else {
-                        text += `\u25B8 *${label}:* ${val}\n`;
+                        text += `* ${label}: ${val}\n`;
                     }
                 }
             });
 
             if (hasMissingImportant) {
-                alert('Por favor, preencha os campos obrigatórios em vermelho para calcularmos o or\xE7amento.');
+                alert('Por favor, preencha os campos obrigatórios em vermelho para calcularmos o orçamento.');
                 form.style.animation = 'none';
                 void form.offsetWidth;
                 form.style.animation = 'shake 0.4s';
                 return;
             }
 
-            text += `\nAguardo o retorno para prosseguirmos! \uD83D\uDCCB`;
+            text += `\nAguardo o retorno para prosseguirmos!`;
             const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
             window.open(waLink, '_blank');
         });
