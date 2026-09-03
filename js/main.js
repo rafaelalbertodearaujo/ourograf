@@ -1,44 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    /* =========================================================================
-       1. HERO CANVAS INTERATIVO (PARTÍCULAS & REDE DOURADA)
-       ========================================================================= */
+    'use strict';
+
+    const OFFICIAL_PHONE = '5549999609130';
+
+    /* ==========================================================================
+       1. HERO CANVAS INTERATIVO OTIMIZADO
+       ========================================================================== */
     const canvas = document.getElementById('hero-canvas');
-    if (canvas) {
+    if (canvas && canvas.parentElement) {
         const ctx = canvas.getContext('2d');
         let width = canvas.width = canvas.parentElement.offsetWidth;
         let height = canvas.height = canvas.parentElement.offsetHeight;
+        let isHeroVisible = true;
+        let animationFrameId = null;
 
-        const particles = [];
-        const particleCount = Math.min(Math.floor(width * 0.05), 65);
-        const maxDistance = 130;
-        let mouse = { x: null, y: null, radius: 150 };
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? Math.min(Math.floor(width * 0.03), 32) : Math.min(Math.floor(width * 0.045), 55);
+        const maxDistance = isMobile ? 95 : 125;
+        let mouse = { x: null, y: null, radius: 130 };
 
         window.addEventListener('resize', () => {
             if (!canvas.parentElement) return;
             width = canvas.width = canvas.parentElement.offsetWidth;
             height = canvas.height = canvas.parentElement.offsetHeight;
-        });
+        }, { passive: true });
 
         window.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
             mouse.x = e.clientX - rect.left;
             mouse.y = e.clientY - rect.top;
-        });
+        }, { passive: true });
 
         window.addEventListener('mouseleave', () => {
             mouse.x = null;
             mouse.y = null;
-        });
+        }, { passive: true });
 
         class Particle {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.size = Math.random() * 2.2 + 1;
-                this.baseAlpha = Math.random() * 0.5 + 0.3;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.size = Math.random() * 2 + 1;
+                this.baseAlpha = Math.random() * 0.45 + 0.25;
                 this.color = `rgba(212, 175, 55, ${this.baseAlpha})`;
             }
 
@@ -49,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
 
-                // Interação com o Mouse
                 if (mouse.x !== null && mouse.y !== null) {
                     const dx = mouse.x - this.x;
                     const dy = mouse.y - this.y;
@@ -57,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (dist < mouse.radius) {
                         const angle = Math.atan2(dy, dx);
                         const force = (mouse.radius - dist) / mouse.radius;
-                        this.x -= Math.cos(angle) * force * 2;
-                        this.y -= Math.sin(angle) * force * 2;
+                        this.x -= Math.cos(angle) * force * 1.8;
+                        this.y -= Math.sin(angle) * force * 1.8;
                     }
                 }
             }
@@ -67,21 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 8;
-                ctx.shadowColor = 'rgba(212, 175, 55, 0.4)';
                 ctx.fill();
-                ctx.shadowBlur = 0;
             }
         }
 
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+        const particles = Array.from({ length: particleCount }, () => new Particle());
 
         function animateCanvas() {
+            if (!isHeroVisible) {
+                animationFrameId = null;
+                return;
+            }
+
             ctx.clearRect(0, 0, width, height);
 
-            // Desenhar Linhas de Conexão
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -89,12 +92,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
                     if (dist < maxDistance) {
-                        const alpha = (1 - dist / maxDistance) * 0.25;
+                        const alpha = (1 - dist / maxDistance) * 0.2;
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.strokeStyle = `rgba(212, 175, 55, ${alpha})`;
-                        ctx.lineWidth = 1;
+                        ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
                 }
@@ -105,16 +108,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 p.draw();
             });
 
-            requestAnimationFrame(animateCanvas);
+            animationFrameId = requestAnimationFrame(animateCanvas);
         }
+
+        const heroElement = document.getElementById('hero');
+        if (heroElement && 'IntersectionObserver' in window) {
+            const heroObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isHeroVisible = entry.isIntersecting;
+                    if (isHeroVisible && !animationFrameId) {
+                        animateCanvas();
+                    }
+                });
+            }, { threshold: 0.05 });
+            heroObserver.observe(heroElement);
+        }
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                isHeroVisible = false;
+            } else if (heroElement && heroElement.getBoundingClientRect().bottom > 0) {
+                isHeroVisible = true;
+                if (!animationFrameId) animateCanvas();
+            }
+        });
 
         animateCanvas();
     }
 
-
-    /* =========================================================================
+    /* ==========================================================================
        2. SCROLL SPY & NAVBAR STICKY
-       ========================================================================= */
+       ========================================================================== */
     const navbar = document.getElementById('navbar');
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -122,14 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', () => {
         const scrollY = window.pageYOffset;
 
-        // Navbar scrolled background
-        if (scrollY > 50) {
+        if (scrollY > 40) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
 
-        // ScrollSpy ativação de links
         sections.forEach(section => {
             const sectionHeight = section.offsetHeight;
             const sectionTop = section.offsetTop - 120;
@@ -137,87 +159,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
+                    link.classList.toggle('active', link.getAttribute('href') === `#${sectionId}`);
                 });
             }
         });
-    });
+    }, { passive: true });
 
-    // Mobile Menu Toggle
-    const mobileToggle = document.getElementById('mobile-toggle');
-    const navLinksContainer = document.getElementById('nav-links');
-    if (mobileToggle && navLinksContainer) {
-        mobileToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('open');
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navLinksContainer.classList.remove('open');
+    /* ==========================================================================
+       3. ON-SCROLL REVEAL ANIMATIONS
+       ========================================================================== */
+    const reveals = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
             });
+        }, {
+            root: null,
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
         });
+
+        reveals.forEach(el => revealObserver.observe(el));
+    } else {
+        reveals.forEach(el => el.classList.add('revealed'));
     }
 
-
-    /* =========================================================================
-       3. ON-SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER)
-       ========================================================================= */
-    const reveals = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.12,
-        rootMargin: '0px 0px -40px 0px'
-    });
-
-    reveals.forEach(el => revealObserver.observe(el));
-
-
-    /* =========================================================================
-       4. FILTROS DA GALERIA DE PORTFÓLIO
-       ========================================================================= */
+    /* ==========================================================================
+       4. FILTROS E LIGHTBOX NAVEGÁVEL DO PORTFÓLIO
+       ========================================================================== */
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+    let activeCategory = 'all';
+    let visibleItems = [...portfolioItems];
+    let currentIndex = 0;
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
-            const filterValue = btn.getAttribute('data-filter');
+            activeCategory = btn.getAttribute('data-filter');
 
-            portfolioItems.forEach(item => {
+            visibleItems = portfolioItems.filter(item => {
                 const category = item.getAttribute('data-category');
-                if (filterValue === 'all' || category === filterValue) {
+                const isMatch = activeCategory === 'all' || category === activeCategory;
+                
+                if (isMatch) {
                     item.style.display = 'block';
                     setTimeout(() => {
                         item.style.opacity = '1';
                         item.style.transform = 'translateY(0)';
-                    }, 50);
+                    }, 20);
                 } else {
                     item.style.opacity = '0';
-                    item.style.transform = 'translateY(15px)';
+                    item.style.transform = 'translateY(12px)';
                     setTimeout(() => {
                         item.style.display = 'none';
-                    }, 300);
+                    }, 200);
                 }
+                return isMatch;
             });
         });
     });
 
-
-    /* =========================================================================
-       5. MODAL LIGHTBOX DINÂMICO DO PORTFÓLIO
-       ========================================================================= */
     const lightboxModal = document.getElementById('lightbox-modal');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxTitle = document.getElementById('lightbox-title');
@@ -225,28 +233,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxDesc = document.getElementById('lightbox-desc');
     const lightboxClose = document.getElementById('lightbox-close');
     const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
     const lightboxWaBtn = document.getElementById('lightbox-wa-btn');
 
-    let currentProjectTitle = '';
+    function updateLightboxContent(index) {
+        if (!visibleItems.length || index < 0 || index >= visibleItems.length) return;
+        currentIndex = index;
+        const currentItem = visibleItems[currentIndex];
+
+        const img = currentItem.getAttribute('data-img');
+        const title = currentItem.getAttribute('data-title');
+        const categoryLabel = currentItem.getAttribute('data-category-label');
+        const desc = currentItem.getAttribute('data-desc');
+
+        lightboxImg.src = img;
+        lightboxImg.alt = title;
+        lightboxTitle.textContent = title;
+        lightboxCategory.textContent = categoryLabel;
+        lightboxDesc.textContent = desc;
+
+        if (visibleItems.length <= 1) {
+            if (lightboxPrev) lightboxPrev.style.display = 'none';
+            if (lightboxNext) lightboxNext.style.display = 'none';
+        } else {
+            if (lightboxPrev) lightboxPrev.style.display = 'flex';
+            if (lightboxNext) lightboxNext.style.display = 'flex';
+        }
+    }
 
     portfolioItems.forEach(item => {
         item.addEventListener('click', () => {
-            const img = item.getAttribute('data-img');
-            const title = item.getAttribute('data-title');
-            const categoryLabel = item.getAttribute('data-category-label');
-            const desc = item.getAttribute('data-desc');
-
-            currentProjectTitle = title;
-
-            lightboxImg.src = img;
-            lightboxImg.alt = title;
-            lightboxTitle.textContent = title;
-            lightboxCategory.textContent = categoryLabel;
-            lightboxDesc.textContent = desc;
-
-            lightboxModal.classList.add('active');
-            lightboxModal.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+            const idx = visibleItems.indexOf(item);
+            if (idx !== -1) {
+                updateLightboxContent(idx);
+                if (lightboxModal) {
+                    lightboxModal.classList.add('active');
+                    lightboxModal.setAttribute('aria-hidden', 'false');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
         });
     });
 
@@ -260,42 +286,57 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
     if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightboxModal && lightboxModal.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    // Ação do Botão de WhatsApp no Lightbox
-    if (lightboxWaBtn) {
-        lightboxWaBtn.addEventListener('click', () => {
-            const phone = '5549999473009';
-            const msg = `Olá, Ourograf!\nVi o projeto no portfólio do site (*${currentProjectTitle}*) e gostaria de solicitar um orçamento similar para a minha empresa.`;
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const nextIdx = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+            updateLightboxContent(nextIdx);
         });
     }
 
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const nextIdx = (currentIndex + 1) % visibleItems.length;
+            updateLightboxContent(nextIdx);
+        });
+    }
 
-    /* =========================================================================
-       6. SIMULADOR DE ORÇAMENTO (TABS, MÓDOS & GERADOR WHATSAPP)
-       ========================================================================= */
+    document.addEventListener('keydown', (e) => {
+        if (!lightboxModal || !lightboxModal.classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            const nextIdx = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
+            updateLightboxContent(nextIdx);
+        } else if (e.key === 'ArrowRight') {
+            const nextIdx = (currentIndex + 1) % visibleItems.length;
+            updateLightboxContent(nextIdx);
+        }
+    });
+
+    if (lightboxWaBtn) {
+        lightboxWaBtn.addEventListener('click', () => {
+            const title = lightboxTitle ? lightboxTitle.textContent : 'Projeto Ourograf';
+            const msg = `Olá, Ourograf!\nEstava vendo o portfólio no site e gostei muito do projeto:\n*${title}*\n\nGostaria de solicitar um orçamento para um serviço similar na minha empresa.`;
+            window.open(`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+    }
+
+    /* ==========================================================================
+       5. SIMULADOR DE ORÇAMENTO (TABS & INTEGRAÇÃO WHATSAPP)
+       ========================================================================== */
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
     window.selectTab = function(targetId) {
         tabBtns.forEach(b => {
-            if (b.getAttribute('data-target') === targetId) {
-                b.classList.add('active');
-            } else {
-                b.classList.remove('active');
-            }
+            const isMatch = b.getAttribute('data-target') === targetId;
+            b.classList.toggle('active', isMatch);
+            b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
         });
         tabContents.forEach(c => {
-            if (c.id === targetId) {
-                c.classList.add('active');
-            } else {
-                c.classList.remove('active');
-            }
+            c.classList.toggle('active', c.id === targetId);
         });
     };
 
@@ -306,13 +347,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Lógica para alternar os modos (Medidas Exatas vs Padrão/Visita)
+    function clearFieldError(input) {
+        if (!input) return;
+        input.classList.remove('input-invalid');
+        const parent = input.closest('.input-group') || input.parentElement;
+        const errorMsg = parent?.querySelector('.field-error-msg');
+        if (errorMsg) errorMsg.remove();
+    }
+
+    function setFieldError(input, message = 'Por favor, preencha este campo obrigatório') {
+        if (!input) return;
+        input.classList.add('input-invalid');
+        const parent = input.closest('.input-group') || input.parentElement;
+        if (parent && !parent.querySelector('.field-error-msg')) {
+            const errorSpan = document.createElement('span');
+            errorSpan.className = 'field-error-msg';
+            errorSpan.innerHTML = `⚠️ ${message}`;
+            parent.appendChild(errorSpan);
+        }
+    }
+
+    // Limpar erros ao digitar ou alterar
+    document.querySelectorAll('.quote-form input, .quote-form select, .quote-form textarea').forEach(input => {
+        input.addEventListener('input', () => clearFieldError(input));
+        input.addEventListener('change', () => clearFieldError(input));
+    });
+
     const modeRadios = document.querySelectorAll('.mode-radio input');
     modeRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
             const form = e.target.closest('form');
-            const mode = e.target.value; // ex: 'medidas', 'visita', 'padrao'
+            const mode = e.target.value;
             
+            // Limpa mensagens de erro ao trocar de modo
+            form.querySelectorAll('.input-invalid').forEach(inp => clearFieldError(inp));
+
             form.querySelectorAll('.form-section').forEach(sec => {
                 sec.style.display = 'none';
                 sec.classList.remove('active');
@@ -323,87 +392,132 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetSec.style.display = 'block';
                 targetSec.classList.add('active');
             }
+
+            // Atualiza dynamic required para não travar campos ocultos
+            const largura = form.querySelector('input[name="largura"]');
+            const altura = form.querySelector('input[name="altura"]');
+            const endereco = form.querySelector('input[name="endereco"]');
+
+            if (mode === 'medidas') {
+                if (largura) largura.required = true;
+                if (altura) altura.required = true;
+                if (endereco) endereco.required = false;
+            } else if (mode === 'visita') {
+                if (largura) largura.required = false;
+                if (altura) altura.required = false;
+                if (endereco) endereco.required = true;
+            } else if (mode === 'padrao') {
+                if (largura) largura.required = false;
+                if (altura) altura.required = false;
+                if (endereco) endereco.required = false;
+            }
         });
     });
 
-    const waButtons = document.querySelectorAll('.generate-wa');
-    const phone = '5549999473009';
+    const quoteForms = document.querySelectorAll('.quote-form');
+    let isSubmitting = false;
 
-    waButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const form = e.target.closest('form');
-            if (!form) return;
+    quoteForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
 
-            const productType = form.getAttribute('data-type');
-            
-            // Verifica o modo atual escolhido
+            if (isSubmitting) return;
+
+            const productType = form.getAttribute('data-type') || 'Comunicação Visual';
             const activeModeRadio = form.querySelector('.mode-radio input:checked');
-            const modeName = activeModeRadio ? activeModeRadio.nextElementSibling.textContent.trim() : '';
-            
-            let text = `Olá, Ourograf!\nGostaria de solicitar um orçamento para: *${productType}*\nModo: *${modeName}*\n\n`;
+            const modeValue = activeModeRadio ? activeModeRadio.value : 'medidas';
+            const modeLabel = activeModeRadio ? activeModeRadio.parentElement.textContent.trim() : '';
 
-            const inputs = form.querySelectorAll('input, select, textarea');
-            let hasMissingImportant = false;
+            let hasError = false;
+            let firstInvalidInput = null;
 
-            // Filtra inputs visíveis
-            const activeInputs = Array.from(inputs).filter(input => {
-                if (input.type === 'radio') return false;
-                const section = input.closest('.form-section');
-                return !section || section.classList.contains('active');
-            });
+            // Validação visual de campos obrigatórios ativos
+            if (modeValue === 'medidas') {
+                const largura = form.querySelector('input[name="largura"]');
+                const altura = form.querySelector('input[name="altura"]');
 
-            activeInputs.forEach(input => {
-                const name = input.getAttribute('name');
-                const val = input.value.trim();
-
-                if (input.hasAttribute('required') && !val) {
-                    hasMissingImportant = true;
-                    input.style.borderColor = '#EF4444';
-                } else if (input.hasAttribute('required')) {
-                    input.style.borderColor = '';
+                if (largura && (!largura.value || parseFloat(largura.value) <= 0)) {
+                    setFieldError(largura, 'Informe a largura estimada');
+                    hasError = true;
+                    if (!firstInvalidInput) firstInvalidInput = largura;
+                } else if (largura) {
+                    clearFieldError(largura);
                 }
 
-                if (val) {
-                    let label = name.charAt(0).toUpperCase() + name.slice(1);
-                    if (name === 'obs') label = 'Observações';
-                    if (name === 'tipo') label = 'Tipo de Fachada';
-                    if (name === 'acabamento') label = 'Acabamento';
-                    if (name === 'aplicacao') label = 'Aplicação';
-                    if (name === 'endereco') label = 'Endereço para Visita';
-                    if (name === 'tamanho_padrao') label = 'Tamanho Estimado';
-                    if (name === 'metro_quadrado') label = 'Área Estimada';
-
-                    if (name === 'largura' || name === 'altura') {
-                        const unit = input.placeholder.includes('Metros') ? 'm' : 'cm';
-                        text += `* ${label}: ${val} ${unit}\n`;
-                    } else {
-                        text += `* ${label}: ${val}\n`;
-                    }
+                if (altura && (!altura.value || parseFloat(altura.value) <= 0)) {
+                    setFieldError(altura, 'Informe a altura estimada');
+                    hasError = true;
+                    if (!firstInvalidInput) firstInvalidInput = altura;
+                } else if (altura) {
+                    clearFieldError(altura);
                 }
-            });
+            } else if (modeValue === 'visita') {
+                const endereco = form.querySelector('input[name="endereco"]');
+                if (endereco && !endereco.value.trim()) {
+                    setFieldError(endereco, 'Informe o endereço ou cidade para a visita técnica');
+                    hasError = true;
+                    if (!firstInvalidInput) firstInvalidInput = endereco;
+                } else if (endereco) {
+                    clearFieldError(endereco);
+                }
+            }
 
-            if (hasMissingImportant) {
-                alert('Por favor, preencha os campos obrigatórios em vermelho para calcularmos o orçamento.');
-                form.style.animation = 'none';
-                void form.offsetWidth;
-                form.style.animation = 'shake 0.4s';
+            if (hasError) {
+                if (firstInvalidInput) {
+                    firstInvalidInput.focus();
+                }
                 return;
             }
 
-            text += `\nAguardo o retorno para prosseguirmos!`;
-            const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-            window.open(waLink, '_blank');
+            isSubmitting = true;
+            setTimeout(() => { isSubmitting = false; }, 1500);
+
+            let detailsLines = [];
+
+            if (modeValue === 'medidas') {
+                const largura = form.querySelector('input[name="largura"]')?.value;
+                const altura = form.querySelector('input[name="altura"]')?.value;
+                if (largura && altura) {
+                    const unit = productType.includes('Fachada') ? 'm' : 'cm';
+                    detailsLines.push(`📏 *Dimensões:* ${largura}${unit} de largura x ${altura}${unit} de altura`);
+                    
+                    if (unit === 'm') {
+                        const areaM2 = (parseFloat(largura) * parseFloat(altura)).toFixed(2);
+                        detailsLines.push(`📐 *Área Estimada:* aprox. ${areaM2} m²`);
+                    }
+                }
+            } else if (modeValue === 'visita') {
+                const endereco = form.querySelector('input[name="endereco"]')?.value;
+                if (endereco) {
+                    detailsLines.push(`📍 *Local para Visita Técnica:* ${endereco}`);
+                }
+            } else if (modeValue === 'padrao') {
+                const tamanhoPadrao = form.querySelector('select[name="tamanho_padrao"]')?.value;
+                const metroQuadrado = form.querySelector('select[name="metro_quadrado"]')?.value;
+                if (tamanhoPadrao) detailsLines.push(`📐 *Tamanho Sugerido:* ${tamanhoPadrao}`);
+                if (metroQuadrado) detailsLines.push(`📐 *Área Estimada:* ${metroQuadrado}`);
+            }
+
+            const tipo = form.querySelector('select[name="tipo"]')?.value;
+            const acabamento = form.querySelector('select[name="acabamento"]')?.value;
+            const aplicacao = form.querySelector('select[name="aplicacao"]')?.value;
+            const obs = form.querySelector('textarea[name="obs"]')?.value?.trim();
+
+            if (tipo) detailsLines.push(`🛠️ *Especificação:* ${tipo}`);
+            if (acabamento) detailsLines.push(`✨ *Acabamento:* ${acabamento}`);
+            if (aplicacao) detailsLines.push(`🎯 *Aplicação:* ${aplicacao}`);
+            if (obs) detailsLines.push(`📝 *Observações:* ${obs}`);
+
+            let message = `Olá, equipe Ourograf!\nSolicito um orçamento pelo simulador do site:\n\n`;
+            message += `🏷️ *Serviço:* ${productType}\n`;
+            if (modeLabel) message += `⚙️ *Opção:* ${modeLabel}\n`;
+            if (detailsLines.length > 0) {
+                message += detailsLines.join('\n') + '\n';
+            }
+            message += `\nAguardo as orientações e valores. Obrigado!`;
+
+            const waUrl = `https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
         });
     });
 });
-
-// Estilo de erro dinâmico (shake)
-const shakeStyle = document.createElement('style');
-shakeStyle.innerHTML = `
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-6px); }
-    75% { transform: translateX(6px); }
-}
-`;
-document.head.appendChild(shakeStyle);

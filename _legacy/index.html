@@ -3,96 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ourograf | Gráfica & Comunicação Visual Premium em Capinzal</title>
-    <meta name="description" content="Ourograf - Gráfica e Comunicação Visual Premium em Capinzal e região. Fachadas em ACM, luminosos LED, banners, adesivação de frotas e materiais gráficos de alta precisão.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://ourograf.com.br/">
-
-    <!-- Open Graph / Redes Sociais -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://ourograf.com.br/">
-    <meta property="og:title" content="Ourograf | Gráfica & Comunicação Visual Premium">
-    <meta property="og:description" content="Fachadas em ACM, luminosos em LED, banners, adesivação de frotas e projetos gráficos de alto impacto para Capinzal e região.">
-    <meta property="og:image" content="https://ourograf.com.br/img/hero-facade.jpg">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="og:site_name" content="Ourograf">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ourograf | Gráfica & Comunicação Visual Premium">
-    <meta name="twitter:description" content="Transforme a presença visual da sua empresa com fachadas em ACM, luminosos e impressão de alta precisão.">
-    <meta name="twitter:image" content="https://ourograf.com.br/img/hero-facade.jpg">
-
+    <meta name="description" content="Ourograf - Gráfica e Comunicação Visual Premium em Capinzal e região. Fachadas em ACM, luminosos, banners, adesivação de frotas e materiais gráficos de alto impacto.">
+    <title>Ourograf | Gráfica & Comunicação Visual Premium</title>
+    
     <!-- Tipografia: Space Grotesk (Display) e Outfit (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Schema.org JSON-LD para SEO Local -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Ourograf - Gráfica e Comunicação Visual",
-      "image": "https://ourograf.com.br/img/hero-facade.jpg",
-      "telephone": "+5549999609130",
-      "url": "https://ourograf.com.br",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Capinzal",
-        "addressRegion": "SC",
-        "addressCountry": "BR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-27.3458",
-        "longitude": "-51.6119"
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        }
-      ],
-      "areaServed": [
-        "Capinzal",
-        "Ouro",
-        "Joaçaba",
-        "Herval d'Oeste",
-        "Campos Novos",
-        "Lacerdópolis"
-      ],
-      "priceRange": "$$",
-      "description": "Comunicação visual premium, fachadas em ACM, luminosos LED, envelopamento de frotas comerciais, banners e adesivos sob medida."
-    }
-    </script>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
+    <!-- Header / Navbar de Conversão Rápida -->
     <header class="navbar" id="navbar">
         <div class="container nav-content">
-            <a href="#hero" class="brand-logo" aria-label="Ourograf Início">
+            <a href="#hero" class="brand-logo">
                 <span class="logo-ouro">OURO</span><span class="logo-graf">GRAF</span><span class="gold-dot">.</span>
             </a>
             
-            <nav class="nav-links" id="nav-links" aria-label="Navegação Principal">
+            <!-- Menu de Navegação (Desktop) -->
+            <nav class="nav-links" id="nav-links">
                 <a href="#hero" class="nav-link active">Início</a>
-                <a href="#orcamento" class="nav-link">Orçamento</a>
                 <a href="#especialidades" class="nav-link">Especialidades</a>
                 <a href="#portfolio" class="nav-link">Portfólio</a>
                 <a href="#diferenciais" class="nav-link">Diferenciais</a>
             </nav>
 
+            <!-- Gatilhos de Ação Diretos (Desktop & Mobile) -->
             <div class="nav-direct-actions">
                 <a href="#orcamento" class="btn-direct-quote" onclick="selectTab('fachada')">
                     <span>Agendar Visita</span>
                 </a>
-                <a href="https://wa.me/5549999609130?text=Ol%C3%A1%2C%20Ourograf!%20Gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-direct-wa pulse-animation" aria-label="Pedir Orçamento no WhatsApp">
+                <a href="https://wa.me/5549999609130?text=Ol%C3%A1%2C%20Ourograf!%20Gostaria%20de%20um%20or%C3%A7amento." target="_blank" rel="noopener noreferrer" class="btn-direct-wa pulse-animation" aria-label="Chamar no WhatsApp">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                     <span>Pedir Orçamento</span>
                 </a>
@@ -100,14 +43,15 @@
         </div>
     </header>
 
-    <!-- Seção 1: Hero -->
+    <!-- Seção 1: Hero com Canvas Interativo de Fora a Fora -->
     <section class="hero" id="hero">
+        <!-- Canvas Dinâmico de Partículas & Linhas Douradas -->
         <canvas id="hero-canvas" class="hero-canvas"></canvas>
         <div class="hero-overlay"></div>
 
         <div class="container hero-content reveal">
             <div class="hero-kicker">
-                <span class="cmyk-dots" aria-hidden="true">
+                <span class="cmyk-dots">
                     <span class="cmyk-c"></span>
                     <span class="cmyk-m"></span>
                     <span class="cmyk-y"></span>
@@ -133,9 +77,10 @@
                 </a>
             </div>
 
+            <!-- Destaque / Teaser Interativo do Simulador -->
             <a href="#orcamento" class="hero-tool-teaser" onclick="selectTab('fachada')">
-                <span class="tool-teaser-icon" aria-hidden="true">⚡</span>
-                <span class="tool-teaser-text"><strong>Simulador Rápido:</strong> Calcule medidas ou solicite visita técnica sem compromisso abaixo ↓</span>
+                <span class="tool-teaser-icon">⚡</span>
+                <span class="tool-teaser-text"><strong>Ferramenta Interativa:</strong> Simule medidas ou agende visita técnica sem compromisso abaixo ↓</span>
             </a>
 
             <div class="hero-stats">
@@ -157,25 +102,25 @@
         </div>
     </section>
 
-    <!-- Seção 2: Simulador de Orçamento -->
+    <!-- Seção 2: Simulador de Orçamento (Aba Interativa Imediata) -->
     <section id="orcamento" class="section bg-darker">
         <div class="container">
             <div class="section-header text-center reveal">
-                <span class="section-tag">ATENDIMENTO DIRETO</span>
+                <span class="section-tag">ORÇAMENTO INSTANTÂNEO</span>
                 <h2>Simulador de <span class="text-gold">Orçamento</span></h2>
-                <p>Preencha os dados do que precisa e receba o orçamento detalhado no WhatsApp oficial da Ourograf.</p>
+                <p>Preencha as medidas do que precisa e receba o retorno com agilidade no WhatsApp.</p>
             </div>
 
-            <div class="quote-builder corner-marks reveal">
+            <div class="quote-builder reveal">
                 <!-- Abas -->
-                <div class="tabs" role="tablist">
-                    <button class="tab-btn active" role="tab" aria-selected="true" data-target="fachada">Fachada</button>
-                    <button class="tab-btn" role="tab" aria-selected="false" data-target="banner">Banner / Lona</button>
-                    <button class="tab-btn" role="tab" aria-selected="false" data-target="adesivo">Adesivo / Frotas</button>
+                <div class="tabs">
+                    <button class="tab-btn active" data-target="fachada">Fachada</button>
+                    <button class="tab-btn" data-target="banner">Banner / Lona</button>
+                    <button class="tab-btn" data-target="adesivo">Adesivo</button>
                 </div>
 
-                <!-- Formulário 1: Fachada -->
-                <div class="tab-content active" id="fachada" role="tabpanel">
+                <!-- Formulários Dinâmicos -->
+                <div class="tab-content active" id="fachada">
                     <form class="quote-form" data-type="Fachada">
                         <div class="quote-mode-selector">
                             <label class="mode-radio">
@@ -184,56 +129,50 @@
                             </label>
                             <label class="mode-radio">
                                 <input type="radio" name="fachada_modo" value="visita">
-                                <span>Agendar Visita Técnica</span>
+                                <span>Agendar Visita (Não sei as medidas)</span>
                             </label>
                         </div>
-
                         <div class="form-section mode-medidas active">
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label for="fachada-largura">Largura Estimada (Metros) *</label>
-                                    <input type="number" id="fachada-largura" step="0.1" min="0.1" name="largura" placeholder="Ex: 5.0" required>
+                                    <label>Largura Estimada (Metros) *</label>
+                                    <input type="number" step="0.1" name="largura" placeholder="Ex: 5.0" required>
                                 </div>
                                 <div class="input-group">
-                                    <label for="fachada-altura">Altura Estimada (Metros) *</label>
-                                    <input type="number" id="fachada-altura" step="0.1" min="0.1" name="altura" placeholder="Ex: 1.5" required>
+                                    <label>Altura Estimada (Metros) *</label>
+                                    <input type="number" step="0.1" name="altura" placeholder="Ex: 1.5" required>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-section mode-visita" style="display: none;">
                             <div class="input-group">
-                                <label for="fachada-endereco">Endereço / Cidade para Visita Técnica *</label>
-                                <input type="text" id="fachada-endereco" name="endereco" placeholder="Ex: Rua XV de Novembro, Centro - Capinzal">
+                                <label>Endereço / Local para Visita Técnica *</label>
+                                <input type="text" name="endereco" placeholder="Ex: Rua Principal, 123 - Centro">
                             </div>
                         </div>
-
                         <div class="input-group">
-                            <label for="fachada-tipo">Tipo de Fachada ou Acabamento</label>
-                            <select id="fachada-tipo" name="tipo">
-                                <option value="Painel em ACM com Letra Caixa 3D">Painel em ACM com Letra Caixa 3D</option>
+                            <label>Tipo de Fachada</label>
+                            <select name="tipo">
+                                <option value="Painel em ACM com Letra Caixa">Painel em ACM com Letra Caixa</option>
                                 <option value="Painel em ACM Simples">Painel em ACM Simples</option>
-                                <option value="Letreiro Iluminado LED / Neon">Letreiro Iluminado LED / Neon</option>
                                 <option value="Lona com Estrutura Metálica">Lona com Estrutura Metálica</option>
-                                <option value="Não sei / Preciso de recomendação">Não sei / Preciso de recomendação</option>
+                                <option value="Letreiro Iluminado LED">Letreiro Iluminado LED</option>
+                                <option value="Não sei / Preciso de consultoria">Não sei / Preciso de consultoria</option>
                             </select>
                         </div>
-
                         <div class="input-group">
-                            <label for="fachada-obs">Observações / Detalhes do Projeto</label>
-                            <textarea id="fachada-obs" name="obs" rows="2" placeholder="Ex: Loja de roupas no centro, preciso de iluminação frontal..."></textarea>
+                            <label>Observações / Detalhes</label>
+                            <textarea name="obs" rows="3" placeholder="Ex: Loja no centro de Capinzal, preciso de iluminação noturna..."></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-full generate-wa">
-                            <span>Solicitar Orçamento no WhatsApp</span>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </button>
                     </form>
                 </div>
 
-                <!-- Formulário 2: Banner / Lona -->
-                <div class="tab-content" id="banner" role="tabpanel">
-                    <form class="quote-form" data-type="Banner / Lona">
+                <div class="tab-content" id="banner">
+                    <form class="quote-form" data-type="Banner/Lona">
                         <div class="quote-mode-selector">
                             <label class="mode-radio">
                                 <input type="radio" name="banner_modo" value="medidas" checked>
@@ -241,60 +180,53 @@
                             </label>
                             <label class="mode-radio">
                                 <input type="radio" name="banner_modo" value="padrao">
-                                <span>Tamanhos Padrão</span>
+                                <span>Ver Tamanhos Padrão</span>
                             </label>
                         </div>
-
                         <div class="form-section mode-medidas active">
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label for="banner-largura">Largura (cm) *</label>
-                                    <input type="number" id="banner-largura" name="largura" placeholder="Ex: 120" required>
+                                    <label>Largura (cm) *</label>
+                                    <input type="number" name="largura" placeholder="Ex: 120" required>
                                 </div>
                                 <div class="input-group">
-                                    <label for="banner-altura">Altura (cm) *</label>
-                                    <input type="number" id="banner-altura" name="altura" placeholder="Ex: 90" required>
+                                    <label>Altura (cm) *</label>
+                                    <input type="number" name="altura" placeholder="Ex: 90" required>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-section mode-padrao" style="display: none;">
                             <div class="input-group">
-                                <label for="banner-padrao">Tamanho Padrão Sugerido</label>
-                                <select id="banner-padrao" name="tamanho_padrao">
-                                    <option value="Pequeno (90x60 cm)">Banner Pequeno (90x60 cm)</option>
-                                    <option value="Médio (120x90 cm)">Banner Médio (120x90 cm)</option>
-                                    <option value="Grande (200x120 cm)">Banner Grande (200x120 cm)</option>
-                                    <option value="Painel de Fundo (300x200 cm)">Painel de Fundo / Backdrop (300x200 cm)</option>
+                                <label>Tamanho Estimado</label>
+                                <select name="tamanho_padrao">
+                                    <option value="Pequeno (aprox. 90x60cm)">Banner Pequeno (aprox. 90x60cm) - Sob Consulta</option>
+                                    <option value="Médio (aprox. 120x90cm)">Banner Médio (aprox. 120x90cm) - Sob Consulta</option>
+                                    <option value="Grande (aprox. 200x120cm)">Banner Grande (aprox. 200x120cm) - Sob Consulta</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="input-group">
-                            <label for="banner-acabamento">Tipo de Acabamento</label>
-                            <select id="banner-acabamento" name="acabamento">
-                                <option value="Bainha reforçada e Ilhós metálicos">Bainha reforçada e Ilhós metálicos</option>
-                                <option value="Bastão de madeira com cordinha superior">Bastão de madeira com cordinha superior</option>
-                                <option value="Banner Roll-Up com suporte retrátil">Banner Roll-Up com suporte retrátil</option>
+                            <label>Tipo de Acabamento</label>
+                            <select name="acabamento">
+                                <option value="Bainha e Ilhós metálicos">Bainha e Ilhós metálicos</option>
+                                <option value="Bastão de madeira com cordinha">Bastão de madeira com cordinha</option>
+                                <option value="Banner Roll-up com suporte">Banner Roll-up com suporte</option>
                                 <option value="Apenas refilado (sem acabamento)">Apenas refilado (sem acabamento)</option>
                             </select>
                         </div>
-
                         <div class="input-group">
-                            <label for="banner-obs">Quantidade e Observações</label>
-                            <textarea id="banner-obs" name="obs" rows="2" placeholder="Ex: 2 unidades para inauguração de evento..."></textarea>
+                            <label>Quantidade e Detalhes</label>
+                            <textarea name="obs" rows="2" placeholder="Ex: 2 unidades para evento..."></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-full generate-wa">
-                            <span>Solicitar Orçamento no WhatsApp</span>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </button>
                     </form>
                 </div>
 
-                <!-- Formulário 3: Adesivo -->
-                <div class="tab-content" id="adesivo" role="tabpanel">
-                    <form class="quote-form" data-type="Adesivo / Frotas">
+                <div class="tab-content" id="adesivo">
+                    <form class="quote-form" data-type="Adesivo">
                         <div class="quote-mode-selector">
                             <label class="mode-radio">
                                 <input type="radio" name="adesivo_modo" value="medidas" checked>
@@ -302,52 +234,47 @@
                             </label>
                             <label class="mode-radio">
                                 <input type="radio" name="adesivo_modo" value="padrao">
-                                <span>Estimativa por Área</span>
+                                <span>Estimativa por m²</span>
                             </label>
                         </div>
-
                         <div class="form-section mode-medidas active">
                             <div class="form-row">
                                 <div class="input-group">
-                                    <label for="adesivo-largura">Largura (cm) *</label>
-                                    <input type="number" id="adesivo-largura" name="largura" placeholder="Ex: 50" required>
+                                    <label>Largura (cm) *</label>
+                                    <input type="number" name="largura" placeholder="Ex: 50" required>
                                 </div>
                                 <div class="input-group">
-                                    <label for="adesivo-altura">Altura (cm) *</label>
-                                    <input type="number" id="adesivo-altura" name="altura" placeholder="Ex: 50" required>
+                                    <label>Altura (cm) *</label>
+                                    <input type="number" name="altura" placeholder="Ex: 50" required>
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-section mode-padrao" style="display: none;">
                             <div class="input-group">
-                                <label for="adesivo-area">Área Estimada</label>
-                                <select id="adesivo-area" name="metro_quadrado">
-                                    <option value="Pequeno Formato (Menos de 1m²)">Pequeno Formato (Menos de 1m²)</option>
-                                    <option value="Médio Formato (1 a 5m²)">Médio Formato (1 a 5m²)</option>
-                                    <option value="Grande Formato (Mais de 5m²)">Grande Formato (Mais de 5m²)</option>
+                                <label>Quantidade Estimada</label>
+                                <select name="metro_quadrado">
+                                    <option value="Menos de 1m²">Pequeno Formato (Menos de 1m²) - Sob Consulta</option>
+                                    <option value="Até 5m²">Médio Formato (1 a 5m²) - Sob Consulta</option>
+                                    <option value="Mais de 5m²">Grande Formato (Mais de 5m²) - Sob Consulta</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="input-group">
-                            <label for="adesivo-aplicacao">Finalidade da Aplicação</label>
-                            <select id="adesivo-aplicacao" name="aplicacao">
-                                <option value="Envelopamento de Veículo / Frota Comercial">Envelopamento de Veículo / Frota Comercial</option>
-                                <option value="Vitrine de Loja / Vidro Comercial">Vitrine de Loja / Vidro Comercial</option>
-                                <option value="Rótulos e Etiquetas Personalizadas">Rótulos e Etiquetas Personalizadas</option>
+                            <label>Finalidade da Aplicação</label>
+                            <select name="aplicacao">
+                                <option value="Vitrine de Loja / Vidro">Vitrine de Loja / Vidro</option>
+                                <option value="Envelopamento de Veículo / Carro">Envelopamento de Veículo / Carro</option>
+                                <option value="Rótulos / Etiquetas Personalizadas">Rótulos / Etiquetas Personalizadas</option>
                                 <option value="Parede / Sinalização Interna">Parede / Sinalização Interna</option>
                                 <option value="Outro">Outro</option>
                             </select>
                         </div>
-
                         <div class="input-group">
-                            <label for="adesivo-obs">Detalhes e Acabamento</label>
-                            <textarea id="adesivo-obs" name="obs" rows="2" placeholder="Ex: Recorte eletrônico no formato do logotipo..."></textarea>
+                            <label>Observações / Detalhes</label>
+                            <textarea name="obs" rows="2" placeholder="Ex: Recorte eletrônico no formato do logo..."></textarea>
                         </div>
-
-                        <button type="submit" class="btn btn-primary btn-full generate-wa">
-                            <span>Solicitar Orçamento no WhatsApp</span>
+                        <button type="button" class="btn btn-primary btn-full generate-wa">
+                            <span>Enviar para o WhatsApp</span>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                         </button>
                     </form>
@@ -356,60 +283,60 @@
         </div>
     </section>
 
-    <!-- Seção 3: Especialidades -->
+    <!-- Seção 3: Especialidades (Bento Box com Imagens Reais) -->
     <section id="especialidades" class="section">
         <div class="container">
             <div class="section-header reveal">
                 <span class="section-tag">SERVIÇOS DE IMPACTO</span>
                 <h2>Nossas <span class="text-gold">Especialidades</span></h2>
-                <p>Estrutura completa e equipamentos de alta precisão para valorizar a identidade visual da sua marca.</p>
+                <p>Estrutura completa e equipamentos de alta precisão para dar vida à sua identidade visual.</p>
             </div>
             
             <div class="bento-grid">
                 <!-- 1. Fachadas ACM -->
-                <div class="bento-card corner-marks reveal">
+                <div class="bento-card reveal">
                     <img src="img/hero-facade.jpg" alt="Fachadas em ACM e Luminosos" class="bento-card-bg" loading="lazy">
                     <div class="card-overlay"></div>
                     <div class="card-content">
                         <span class="card-badge">Carro-Chefe</span>
                         <h3>Fachadas em ACM & Luminosos</h3>
-                        <p>Painéis em alumínio composto, letras caixa 3D, iluminação LED e acabamento de alto padrão arquitetônico.</p>
+                        <p>Painéis de alumínio composto, letras caixa 3D, neon LED e acabamento de alto padrão arquitetônico.</p>
                         <a href="#orcamento" class="card-link" onclick="selectTab('fachada')">Calcular Fachada &rarr;</a>
                     </div>
                 </div>
                 
                 <!-- 2. Banners e Lonas -->
-                <div class="bento-card corner-marks reveal">
+                <div class="bento-card reveal">
                     <img src="img/banners.jpg" alt="Lonas e Banners em Alta Definição" class="bento-card-bg" loading="lazy">
                     <div class="card-overlay"></div>
                     <div class="card-content">
                         <span class="card-badge">Alta Definição</span>
-                        <h3>Lonas & Banners UV</h3>
-                        <p>Impressão digital de alta resolução para eventos, outdoors, feiras e promoções de grande visibilidade.</p>
+                        <h3>Lonas & Banners</h3>
+                        <p>Impressão digital UV e eco-solvente para eventos, outdoors, feiras e promoções de grande visibilidade.</p>
                         <a href="#orcamento" class="card-link" onclick="selectTab('banner')">Orçar Banner &rarr;</a>
                     </div>
                 </div>
 
                 <!-- 3. Adesivos & Frotas -->
-                <div class="bento-card corner-marks reveal">
+                <div class="bento-card reveal">
                     <img src="img/envelopamento.jpg" alt="Adesivos e Envelopamento de Frotas" class="bento-card-bg" loading="lazy">
                     <div class="card-overlay"></div>
                     <div class="card-content">
                         <span class="card-badge">Personalização</span>
                         <h3>Adesivos & Frotas</h3>
-                        <p>Envelopamento profissional de veículos comerciais, vitrines, rótulos e vinis de máxima durabilidade.</p>
+                        <p>Envelopamento profissional de veículos comerciais, vitrines, rótulos e vinis de alta durabilidade.</p>
                         <a href="#orcamento" class="card-link" onclick="selectTab('adesivo')">Orçar Adesivo &rarr;</a>
                     </div>
                 </div>
                 
                 <!-- 4. Totens e Sinalização -->
-                <div class="bento-card corner-marks reveal">
+                <div class="bento-card reveal">
                     <img src="img/totem-luminoso.jpg" alt="Totens e Sinalização Premium" class="bento-card-bg" loading="lazy">
                     <div class="card-overlay"></div>
                     <div class="card-content">
                         <span class="card-badge">Sinalização Premium</span>
-                        <h3>Totens & Projetos Especiais</h3>
-                        <p>Sinalização corporativa interna e externa, totens verticais, acrílicos e projetos 100% customizados.</p>
+                        <h3>Totens, Placas & Projetos Especiais</h3>
+                        <p>Sinalização corporativa interna e externa, totens rodoviários, acrílicos e projetos 100% customizados.</p>
                         <a href="#orcamento" class="card-link" onclick="selectTab('fachada')">Fazer Projeto Especial &rarr;</a>
                     </div>
                 </div>
@@ -417,17 +344,17 @@
         </div>
     </section>
 
-    <!-- Seção 4: Portfólio com Lightbox Navegável -->
+    <!-- Seção 3: Portfólio com Filtro e Lightbox Dinâmico -->
     <section id="portfolio" class="section bg-darker">
         <div class="container">
             <div class="section-header text-center reveal">
                 <span class="section-tag">GALERIA DE TRABALHOS</span>
                 <h2>Nosso <span class="text-gold">Portfólio</span></h2>
-                <p>Veja a qualidade dos acabamentos e materiais entregues aos nossos clientes em toda a região.</p>
+                <p>Veja a qualidade dos acabamentos e materiais entregues aos nossos clientes.</p>
             </div>
 
             <!-- Filtros de Categoria -->
-            <div class="portfolio-filters reveal" role="tablist" aria-label="Filtrar Projetos">
+            <div class="portfolio-filters reveal">
                 <button class="filter-btn active" data-filter="all">Todos</button>
                 <button class="filter-btn" data-filter="fachada">Fachadas</button>
                 <button class="filter-btn" data-filter="adesivo">Adesivos & Frotas</button>
@@ -449,7 +376,7 @@
                             <span class="portfolio-tag">Fachadas</span>
                             <h4>Fachada Comercial ACM</h4>
                             <p>Letra caixa 3D com iluminação LED</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
@@ -458,15 +385,15 @@
                 <div class="portfolio-item reveal" data-category="adesivo"
                      data-title="Envelopamento Profissional de Frota Comercial"
                      data-category-label="Adesivos & Envelopamento"
-                     data-desc="Adesivação total com vinil premium preto fosco e grafismos dourados em alta durabilidade para veículos comerciais."
+                     data-desc="Adesivação total com vinil premium preto fosco e grafismos dourados em alta durabilidade para veículos de entrega."
                      data-img="img/envelopamento.jpg">
                     <div class="portfolio-thumb">
                         <img src="img/envelopamento.jpg" alt="Envelopamento de Frota Comercial" loading="lazy">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">Frotas</span>
                             <h4>Envelopamento de Frota</h4>
-                            <p>Vinil fosco com detalhes em dourado</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <p>Vinil fosco com detalhes dourados</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
@@ -483,16 +410,16 @@
                             <span class="portfolio-tag">Banners</span>
                             <h4>Estande & Banners Roll-up</h4>
                             <p>Impressão fotográfica de alta definição</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Item 4: Adesivação de Vitrine -->
                 <div class="portfolio-item reveal" data-category="adesivo"
-                     data-title="Adesivação e Decoração de Vitrine Comercial"
+                     data-title="Adesivação e Decoração de Vitrine Boutique"
                      data-category-label="Adesivos & Vitrines"
-                     data-desc="Recorte eletrônico de vinil dourado metálico e jateado para vitrine comercial com máxima precisão e elegância."
+                     data-desc="Recorte eletrônico de vinil dourado metálico e jateado para vitrine de loja com máxima precisão e elegância."
                      data-img="img/adesivos-vitrine.jpg">
                     <div class="portfolio-thumb">
                         <img src="img/adesivos-vitrine.jpg" alt="Adesivação de Vitrine" loading="lazy">
@@ -500,7 +427,7 @@
                             <span class="portfolio-tag">Vitrines</span>
                             <h4>Decoração de Vitrine</h4>
                             <p>Recorte eletrônico vinil dourado</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
@@ -509,7 +436,7 @@
                 <div class="portfolio-item reveal" data-category="totem"
                      data-title="Totem Monumental Iluminado para Sede Corporativa"
                      data-category-label="Totens & Sinalização"
-                     data-desc="Totem vertical de 4 metros em ACM escovado com iluminação indireta e logo vazado com backlighting."
+                     data-desc="Totem vertical de 4 metros em ACM gold escovado com iluminação indireta e logo vazado com backlighting."
                      data-img="img/totem-luminoso.jpg">
                     <div class="portfolio-thumb">
                         <img src="img/totem-luminoso.jpg" alt="Totem Iluminado Corporativo" loading="lazy">
@@ -517,24 +444,24 @@
                             <span class="portfolio-tag">Totens</span>
                             <h4>Totem Corporativo LED</h4>
                             <p>ACM escovado com iluminação indireta</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Item 6: Fachada Noturna Iluminada -->
                 <div class="portfolio-item reveal" data-category="fachada"
-                     data-title="Fachada Noturna com Painel Luminoso LED"
+                     data-title="Fachada Arquitetônica Noturna com Painel Luminoso"
                      data-category-label="Fachadas & Luminosos"
-                     data-desc="Solução integrada de comunicação noturna com módulos LED de alta eficiência e letras em relevo."
+                     data-desc="Solução integrada de comunicação noturna com lâmpadas LED de alta eficiência e letras em relevo."
                      data-img="img/hero-facade.jpg">
                     <div class="portfolio-thumb">
                         <img src="img/hero-facade.jpg" alt="Fachada Noturna Iluminada" loading="lazy">
                         <div class="portfolio-overlay">
                             <span class="portfolio-tag">Fachadas</span>
                             <h4>Luminoso Noturno Premium</h4>
-                            <p>Alta visibilidade e resistência ao clima</p>
-                            <span class="portfolio-action">🔍 Ver Detalhes</span>
+                            <p>Alta visibilidade e resistência climática</p>
+                            <span class="portfolio-action">🔍 Ampliar Detalhes</span>
                         </div>
                     </div>
                 </div>
@@ -542,60 +469,57 @@
         </div>
     </section>
 
-    <!-- Seção 5: Diferenciais -->
+    <!-- Seção 4: Diferenciais Ourograf -->
     <section id="diferenciais" class="section">
         <div class="container">
             <div class="section-header text-center reveal">
                 <span class="section-tag">COMPROMISSO COM A QUALIDADE</span>
                 <h2>Nossos <span class="text-gold">Diferenciais</span></h2>
-                <p>Entregamos mais do que materiais gráficos; entregamos durabilidade, acabamento impecável e impacto visual real.</p>
+                <p>Entregamos mais do que materiais gráficos; entregamos durabilidade e impacto visual de alto nível.</p>
             </div>
 
             <div class="features-grid">
-                <div class="feature-card corner-marks reveal">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                     </div>
-                    <h3>Materiais de Alta Performance</h3>
-                    <p>Trabalhamos com vinis de alta durabilidade, ACM de espessura superior e tintas UV que mantêm a vivacidade sob sol e chuva.</p>
+                    <h3>Materiais Premium</h3>
+                    <p>Trabalhamos exclusivamente com vinis de alta performance, ACM de espessura superior e tintas UV originais que não desbotam ao sol.</p>
                 </div>
 
-                <div class="feature-card corner-marks reveal">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     </div>
-                    <h3>Alta Resistência Climática</h3>
-                    <p>Estruturas projetadas para resistir a ventos e intempéries da região sul, mantendo o alinhamento e estética por anos.</p>
+                    <h3>Alta Durabilidade</h3>
+                    <p>Nossas fachadas e letreiros são estruturados para resistir a intempéries climáticas severas, mantendo a estética impecável por anos.</p>
                 </div>
 
-                <div class="feature-card corner-marks reveal">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                <div class="feature-card reveal glass-panel">
+                    <div class="feature-icon text-gold">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
                     </div>
                     <h3>Instalação Especializada</h3>
-                    <p>Equipe própria e capacitada, garantindo acabamento profissional, sem bolhas, sem rebarbas e respeitando a estrutura do seu imóvel.</p>
+                    <p>Equipe própria e treinada, garantindo um acabamento perfeito, sem bolhas, sem rebarbas e respeitando a estrutura do seu imóvel.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal Lightbox Navegável do Portfólio -->
-    <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true">
+
+
+    <!-- Modal Dinâmico Lightbox do Portfólio -->
+    <div class="lightbox-modal" id="lightbox-modal" aria-hidden="true">
         <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
-        <div class="lightbox-dialog corner-marks">
-            <button class="lightbox-close" id="lightbox-close" aria-label="Fechar janela de detalhes">&times;</button>
-            
+        <div class="lightbox-dialog">
+            <button class="lightbox-close" id="lightbox-close" aria-label="Fechar janela">&times;</button>
             <div class="lightbox-media">
-                <button class="lightbox-nav-btn lightbox-prev" id="lightbox-prev" aria-label="Projeto anterior">&#8592;</button>
                 <img src="" alt="" id="lightbox-img">
-                <button class="lightbox-nav-btn lightbox-next" id="lightbox-next" aria-label="Próximo projeto">&#8594;</button>
             </div>
-            
             <div class="lightbox-info">
                 <span class="lightbox-badge" id="lightbox-category">Fachadas</span>
                 <h3 id="lightbox-title">Título do Projeto</h3>
                 <p id="lightbox-desc">Descrição detalhada do projeto.</p>
-                
                 <div class="lightbox-actions">
                     <button type="button" class="btn btn-primary" id="lightbox-wa-btn">
                         <span>Pedir Projeto Similar no WhatsApp</span>
@@ -606,11 +530,11 @@
         </div>
     </div>
 
-    <!-- Rodapé -->
+    <!-- Rodapé Completo -->
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col brand-col">
-                <a href="#hero" class="brand-logo" aria-label="Ourograf Início">
+                <a href="#hero" class="brand-logo">
                     <span class="logo-ouro">OURO</span><span class="logo-graf">GRAF</span><span class="gold-dot">.</span>
                 </a>
                 <p class="footer-desc">
@@ -618,7 +542,7 @@
                 </p>
                 <div class="footer-social-links">
                     <a href="https://www.instagram.com/ourograf.og/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram @ourograf.og">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                         </svg>
                         <span>@ourograf.og</span>
@@ -630,10 +554,10 @@
                 <h4>Especialidades</h4>
                 <ul class="footer-links">
                     <li><a href="#orcamento" onclick="selectTab('fachada')">Fachadas em ACM</a></li>
-                    <li><a href="#orcamento" onclick="selectTab('fachada')">Letreiros Luminosos LED</a></li>
+                    <li><a href="#orcamento" onclick="selectTab('fachada')">Letreiros Luminosos & LED</a></li>
                     <li><a href="#orcamento" onclick="selectTab('banner')">Lonas & Banners UV</a></li>
                     <li><a href="#orcamento" onclick="selectTab('adesivo')">Envelopamento de Frotas</a></li>
-                    <li><a href="#orcamento" onclick="selectTab('fachada')">Totens Corporativos</a></li>
+                    <li><a href="#orcamento" onclick="selectTab('fachada')">Totens & Projetos Especiais</a></li>
                 </ul>
             </div>
 
@@ -658,11 +582,11 @@
         </div>
 
         <div class="container footer-bottom">
-            <p>&copy; 2026 Ourograf Gráfica e Comunicação Visual. Capinzal - SC. Todos os direitos reservados.</p>
+            <p>&copy; 2026 Ourograf Gráfica e Comunicação Visual. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <!-- Widget Flutuante Canto Inferior Direito (Instagram & WhatsApp) -->
+    <!-- Widget Flutuante Canto Inferior Direito (WhatsApp & Instagram) -->
     <div class="floating-social-widget" id="floating-widget">
         <a href="https://www.instagram.com/ourograf.og/" target="_blank" rel="noopener noreferrer" class="floating-btn float-ig" aria-label="Seguir no Instagram" title="Siga @ourograf.og no Instagram">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
