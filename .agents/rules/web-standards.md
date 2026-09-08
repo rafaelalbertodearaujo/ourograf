@@ -2,6 +2,8 @@
 ## CHANGELOG — Web Standards
 | Versão | Data       | Autor | Mudança                                                   |
 | :----- | :--------- | :---- | :-------------------------------------------------------- |
+| v1.8.0 | 2026-09-08 | AGY   | Rota de Fuga Obrigatória em Painéis Admin e Telas de Login|
+|        |            |       | (§4.11 e §6): botão 'Voltar ao site' acessível (>=44px).  |
 | v1.7.0 | 2026-09-08 | AGY   | Padrões de Formulários Multi-Etapa (Wizard com botão      |
 |        |            |       | 'Voltar' bidirecional, TTL de cache em localStorage,      |
 |        |            |       | validação estrita de cidades, validação profunda de DDD,  |
@@ -367,6 +369,12 @@ Estas regras são **inegociáveis** e devem ser aplicadas em todo bloco de códi
 - Caso o formulário solicite CPF, é proibido validar apenas a quantidade de 11 dígitos.
 - O validador DEVE executar o algoritmo oficial da Receita Federal (cálculo ponderado dos 2 dígitos verificadores via módulo 11) e bloquear sequências repetidas conhecidas (`000.000.000-00`, `111.111.111-11`, etc.).
 
+### 4.11 Painéis Administrativos e Telas de Login: Rota de Fuga Obrigatória ("Voltar ao Site")
+- **Rota de Fuga na Tela de Login:** Toda tela de login administrativo (`admin.html`) DEVE conter obrigatoriamente um link ou botão visível e acessível (`← Voltar ao site`) apontando para `/` ou `index.html`.
+- **Prevenção de Aprisionamento:** Usuários ou clientes que acessarem a URL do painel administrativo por engano (ou via link discreto no rodapé) não podem ficar presos sem rota de saída, nem depender do botão Voltar do navegador.
+- **Padrão Visual:** Target de toque mínimo de 44x44px, ícone SVG de seta limpo (sem emojis), tipografia corporativa e contraste WCAG AA.
+- **Link no Painel Autenticado:** Dentro da sidebar ou navbar do painel logado, manter um atalho permanente (`↗ Ver site`) com `target="_blank"` e `rel="noopener noreferrer"`.
+
 ---
 
 ## 5. Performance e Assets
@@ -449,6 +457,7 @@ Este checklist DEVE ser executado sobre a página montada completa antes de decl
 - [ ] **:focus-visible:** Não removido — outline visível em navegação por teclado
 - [ ] **Blocos de texto:** `max-width: 65ch` aplicado em parágrafos e texto corrido
 - [ ] **Affordances em touch/mobile:** Dicas de ação e ampliação ("Ampliar Foto") visíveis permanentemente em telas touch (`@media (hover: none), (max-width: 768px)`), sem depender de hover
+- [ ] **Painéis Administrativos & Telas de Login:** Tela de login possui botão explícito e acessível ("← Voltar ao site", >=44px) para retornar ao site público, e o dashboard possui atalho fixo "Ver site"
 - [ ] **Ritmo visual:** Nenhuma sequência de 3+ seções `[DENSA]` consecutivas (grid, lista, tabela, cards múltiplos)
 - [ ] **Prefers-reduced-motion:** Fallback estático implementado para todas as animações e transições
 
