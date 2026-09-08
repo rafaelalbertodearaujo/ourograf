@@ -1,0 +1,21 @@
+# Ourograf - Gráfica Rápida, Offset, Embalagens e Comunicação Visual
+
+> Documentação estruturada para modelos de linguagem (LLMs) e agentes de IA sobre a Ourograf, localizada em Capinzal / Ouro - SC.
+
+## Visão Geral do Negócio
+A Ourograf é uma indústria gráfica e birô de comunicação visual completo, especializado em impressão offset de alta tiragem, gráfica rápida digital, embalagens personalizadas, fachadas em ACM e letreiros luminosos para empresas de Santa Catarina.
+
+## Estrutura do Website
+- `/index.html`: Página institucional com portfólio interativo navegável por categorias, simulador multi-modo de orçamentos e contato comercial via WhatsApp.
+- `/404.html`: Página personalizada de erro 404.
+- `/sitemap.xml`: Mapa de indexação para motores de busca.
+- `/robots.txt`: Diretivas para robôs de busca.
+
+## Linhas de Serviços Principais
+- **Comunicação Visual:** Fachadas comerciais, envelopamento de frotas, banners e placas em ACM.
+- **Gráfica Comercial & Editorial:** Pastas corporativas, catálogos, panfletos e receituários.
+- **Embalagens & Rótulos:** Caixas personalizadas e adesivos de alta resistência.
+
+## Localização & Contato
+- **Região de Atendimento:** Capinzal, Ouro, Joaçaba e Meio-Oeste Catarinense.
+- **Atendimento Comercial:** WhatsApp oficial integrado no website.

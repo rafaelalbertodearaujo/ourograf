@@ -14,7 +14,7 @@
     --color-primary: #D4AF37;
     --color-primary-hover: #E5C158;
     --color-primary-dark: #A68222;
-    --color-primary-glow: rgba(212, 175, 55, 0.22);
+    --color-primary-subtle: rgba(212, 175, 55, 0.15);
     
     /* Cores Técnicas de Precisão Gráfica (CMYK) */
     --cmyk-c: #00A3E0;
@@ -160,9 +160,6 @@ button {
 
 .text-gold {
     color: var(--color-primary);
-    background: linear-gradient(135deg, #F8E79B 0%, #D4AF37 50%, #B38E22 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 .text-center {
@@ -300,7 +297,7 @@ button {
     font-size: 0.95rem;
     font-weight: 600;
     line-height: 1;
-    min-height: 48px;
+    min-height: 48px; /* touch-target: mínimo de 44px conforme web-standards */
     transition: all 0.2s ease;
     cursor: pointer;
     text-align: center;
@@ -853,7 +850,6 @@ button {
 
 .bento-card:hover {
     border-color: var(--color-border-hover);
-    transform: translateY(-4px);
 }
 
 .bento-card-bg {
@@ -983,7 +979,6 @@ button {
 
 .portfolio-item:hover {
     border-color: var(--color-border-hover);
-    transform: translateY(-4px);
 }
 
 .portfolio-thumb {
@@ -1208,7 +1203,6 @@ button {
 
 .feature-card:hover {
     border-color: var(--color-border-hover);
-    transform: translateY(-3px);
 }
 
 .feature-icon {
@@ -1607,3 +1601,28 @@ button {
         width: 100%;
     }
 }
+
+/* ── Acessibilidade Vestibular: Respeito a Movimento Reduzido ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+/* ── Acessibilidade: Live Regions & Screen Readers ── */
+.sr-only-accessible {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+

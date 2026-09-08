@@ -262,15 +262,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    let lightboxTrapCleanup = null;
+    let lastActiveElement = null;
+
+    /**
+     * Implementa focus trap acessível dentro de um elemento modal (WCAG 2.4.3).
+     * @param {HTMLElement} modalEl - O elemento do modal
+     * @param {Function} [onClose] - Callback para fechar ao pressionar Escape
+     * @returns {Function} Cleanup function para remover os event listeners
+     */
+    function createFocusTrap(modalEl, onClose) {
+        const focusableSelectors = [
+            'a[href]', 'button:not([disabled])', 'input:not([disabled])',
+            'select:not([disabled])', 'textarea:not([disabled])',
+            '[tabindex]:not([tabindex="-1"])'
+        ].join(', ');
+
+        function trapFocus(e) {
+            if (e.key !== 'Tab') return;
+            const focusables = Array.from(modalEl.querySelectorAll(focusableSelectors));
+            if (!focusables.length) { e.preventDefault(); return; }
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+
+            if (e.shiftKey) {
+                if (document.activeElement === first || !modalEl.contains(document.activeElement)) {
+                    e.preventDefault();
+                    last.focus();
+                }
+            } else {
+                if (document.activeElement === last || !modalEl.contains(document.activeElement)) {
+                    e.preventDefault();
+                    first.focus();
+                }
+            }
+        }
+
+        function handleEsc(e) {
+            if (e.key === 'Escape') {
+                if (typeof onClose === 'function') {
+                    onClose();
+                } else {
+                    modalEl.dispatchEvent(new Event('modal:close'));
+                }
+            }
+        }
+
+        modalEl.addEventListener('keydown', trapFocus);
+        document.addEventListener('keydown', handleEsc);
+        const initialFocus = modalEl.querySelector(focusableSelectors);
+        initialFocus?.focus();
+
+        return function cleanup() {
+            modalEl.removeEventListener('keydown', trapFocus);
+            document.removeEventListener('keydown', handleEsc);
+        };
+    }
+
     portfolioItems.forEach(item => {
         item.addEventListener('click', () => {
             const idx = visibleItems.indexOf(item);
             if (idx !== -1) {
+                lastActiveElement = document.activeElement;
                 updateLightboxContent(idx);
                 if (lightboxModal) {
                     lightboxModal.classList.add('active');
                     lightboxModal.setAttribute('aria-hidden', 'false');
                     document.body.style.overflow = 'hidden';
+                    if (lightboxTrapCleanup) lightboxTrapCleanup();
+                    lightboxTrapCleanup = createFocusTrap(lightboxModal, closeLightbox);
                 }
             }
         });
@@ -278,9 +338,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeLightbox() {
         if (!lightboxModal) return;
+        if (lightboxTrapCleanup) {
+            lightboxTrapCleanup();
+            lightboxTrapCleanup = null;
+        }
         lightboxModal.classList.remove('active');
         lightboxModal.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
+        if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+            lastActiveElement.focus();
+        }
     }
 
     if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
@@ -319,7 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lightboxWaBtn.addEventListener('click', () => {
             const title = lightboxTitle ? lightboxTitle.textContent : 'Projeto Ourograf';
             const msg = `Olá, Ourograf!\nEstava vendo o portfólio no site e gostei muito do projeto:\n*${title}*\n\nGostaria de solicitar um orçamento para um serviço similar na minha empresa.`;
-            window.open(`https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=${OFFICIAL_PHONE}&text=${encodeURIComponent(msg)}`, '_blank');
         });
     }
 
@@ -462,12 +529,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            const errorRegion = document.getElementById('quote-error-region');
+            const statusRegion = document.getElementById('quote-status-region');
+
             if (hasError) {
+                if (errorRegion) errorRegion.textContent = 'Erros encontrados no formulário. Por favor, verifique os campos destacados.';
                 if (firstInvalidInput) {
                     firstInvalidInput.focus();
                 }
                 return;
             }
+
+            if (errorRegion) errorRegion.textContent = '';
+            if (statusRegion) statusRegion.textContent = 'Orçamento preparado com sucesso! Abrindo WhatsApp...';
 
             isSubmitting = true;
             setTimeout(() => { isSubmitting = false; }, 1500);
@@ -479,23 +553,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 const altura = form.querySelector('input[name="altura"]')?.value;
                 if (largura && altura) {
                     const unit = productType.includes('Fachada') ? 'm' : 'cm';
-                    detailsLines.push(`📏 *Dimensões:* ${largura}${unit} de largura x ${altura}${unit} de altura`);
+                    detailsLines.push(`• *Dimensões:* ${largura}${unit} de largura x ${altura}${unit} de altura`);
                     
                     if (unit === 'm') {
                         const areaM2 = (parseFloat(largura) * parseFloat(altura)).toFixed(2);
-                        detailsLines.push(`📐 *Área Estimada:* aprox. ${areaM2} m²`);
+                        detailsLines.push(`• *Área Estimada:* aprox. ${areaM2} m²`);
                     }
                 }
             } else if (modeValue === 'visita') {
                 const endereco = form.querySelector('input[name="endereco"]')?.value;
                 if (endereco) {
-                    detailsLines.push(`📍 *Local para Visita Técnica:* ${endereco}`);
+                    detailsLines.push(`• *Local para Visita Técnica:* ${endereco}`);
                 }
             } else if (modeValue === 'padrao') {
                 const tamanhoPadrao = form.querySelector('select[name="tamanho_padrao"]')?.value;
                 const metroQuadrado = form.querySelector('select[name="metro_quadrado"]')?.value;
-                if (tamanhoPadrao) detailsLines.push(`📐 *Tamanho Sugerido:* ${tamanhoPadrao}`);
-                if (metroQuadrado) detailsLines.push(`📐 *Área Estimada:* ${metroQuadrado}`);
+                if (tamanhoPadrao) detailsLines.push(`• *Tamanho Sugerido:* ${tamanhoPadrao}`);
+                if (metroQuadrado) detailsLines.push(`• *Área Estimada:* ${metroQuadrado}`);
             }
 
             const tipo = form.querySelector('select[name="tipo"]')?.value;
@@ -503,20 +577,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const aplicacao = form.querySelector('select[name="aplicacao"]')?.value;
             const obs = form.querySelector('textarea[name="obs"]')?.value?.trim();
 
-            if (tipo) detailsLines.push(`🛠️ *Especificação:* ${tipo}`);
-            if (acabamento) detailsLines.push(`✨ *Acabamento:* ${acabamento}`);
-            if (aplicacao) detailsLines.push(`🎯 *Aplicação:* ${aplicacao}`);
-            if (obs) detailsLines.push(`📝 *Observações:* ${obs}`);
+            if (tipo) detailsLines.push(`• *Especificação:* ${tipo}`);
+            if (acabamento) detailsLines.push(`• *Acabamento:* ${acabamento}`);
+            if (aplicacao) detailsLines.push(`• *Aplicação:* ${aplicacao}`);
+            if (obs) detailsLines.push(`• *Observações:* ${obs}`);
 
             let message = `Olá, equipe Ourograf!\nSolicito um orçamento pelo simulador do site:\n\n`;
-            message += `🏷️ *Serviço:* ${productType}\n`;
-            if (modeLabel) message += `⚙️ *Opção:* ${modeLabel}\n`;
+            message += `• *Serviço:* ${productType}\n`;
+            if (modeLabel) message += `• *Opção:* ${modeLabel}\n`;
             if (detailsLines.length > 0) {
                 message += detailsLines.join('\n') + '\n';
             }
-            message += `\nAguardo as orientações e valores. Obrigado!`;
+            message += `\nAguardo orientações e valores. Obrigado!`;
 
-            const waUrl = `https://wa.me/${OFFICIAL_PHONE}?text=${encodeURIComponent(message)}`;
+            const waUrl = `https://api.whatsapp.com/send?phone=${OFFICIAL_PHONE}&text=${encodeURIComponent(message)}`;
             window.open(waUrl, '_blank');
         });
     });
