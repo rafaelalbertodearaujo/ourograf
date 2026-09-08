@@ -42,7 +42,7 @@ Após gerar ou editar **qualquer** bloco de código (HTML, CSS ou JS), o agente 
      • Sentido & Propósito: [Frase justificando o valor do bloco sem slop]
      • Touch & Mobile Affordance: [Garantido funcionamento sem hover em telas touch / min-height 44px]
      • Formulários & Links: [Validação estrita, WhatsApp direto api.whatsapp.com/send, cache TTL 2h, ou N/A]
-     • Anti-Patterns (AP-01 a AP-24): Zero violações detectadas
+     • Anti-Patterns (AP-01 a AP-25): Zero violações detectadas (incluindo rota de fuga em login)
      • Linter Estático: 0 FAIL | X WARN
      • Extração Imediata: [Lógica >40 linhas sugerida para patterns/js-modules/ ou N/A]
 
