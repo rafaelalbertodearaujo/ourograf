@@ -4,8 +4,8 @@
 ## CHANGELOG — development-flow.md
 | Versão | Data       | Autor | Mudança                                                                       |
 | :----- | :--------- | :---- | :---------------------------------------------------------------------------- |
-| v1.7.0 | 2026-09-08 | AGY   | Integração do Micro Task Observer no Hard Stop Protocol (§1), auditoria ativa |
-|        |            |       | bloco a bloco anti-alucinação e sincronização com agency-flow v1.7.0.         |
+| v1.8.0 | 2026-09-08 | AGY   | Integração do Micro Task Observer no Hard Stop Protocol (§1), auditoria ativa |
+|        |            |       | bloco a bloco anti-alucinação e sincronização com agency-flow v1.8.0.         |
 | v1.6.0 | 2026-09-04 | AGY   | Design Despoluído & Filtro Subtrativo (§3.1), sincronização com agency-flow v1.6.0. |
 | v1.5.0 | 2026-09-04 | AGY   | Hard Stop Protocol (§1), Protocolo de Correção Cirúrgica (§1), sincronização com agency-flow.md v1.5.0. |
 | v1.4.0 | 2026-09-04 | AGY   | Sincronização com agency-flow.md v1.4.0 (Linter estático, UTMs, 2026 APIs)   |
@@ -13,7 +13,7 @@
 | v1.1.0 | 2026-08-28 | AGY   | Checkpoint de raciocínio obrigatório antes de cada bloco; referência ao CHANGELOG de agency-flow |
 | v1.0.0 | 2026-01-01 | AGY   | Versão inicial                                                                |
 
-Esta regra está sincronizada com agency-flow.md v1.7.0. Atualize em conjunto.
+Esta regra está sincronizada com agency-flow.md v1.8.0. Atualize em conjunto.
 -->
 
 Esta regra é a fonte canônica do fluxo de desenvolvimento. Ela é aplicada globalmente em qualquer tarefa de criação, modificação ou refatoração de sites neste workspace.
@@ -35,16 +35,17 @@ Esta regra é a fonte canônica do fluxo de desenvolvimento. Ela é aplicada glo
 
 Após gerar ou editar **qualquer** bloco de código (HTML, CSS ou JS), o agente DEVE:
 1. **Executar Auditoria Estática:** Rodar imediatamente `node .design-system/linter/static-qa.js [projeto]`. Se houver qualquer 🔴 FAIL, aplicar correção cirúrgica antes de apresentar ao usuário.
-2. **Executar o Micro Task Observer:** Avaliar o bloco sob as 5 dimensões críticas (sentido & propósito sem slop, touch affordance sem dependência de hover, formulários/links estritos, ausência de anti-patterns AP-01 a AP-24 e extração de lógica inédita >40 linhas).
+2. **Executar o Micro Task Observer:** Avaliar o bloco sob as 6 dimensões críticas (sentido & propósito sem slop, touch affordance sem dependência de hover, formulários/links estritos, normalização de tokens anti-frankenstein, ausência de anti-patterns AP-01 a AP-25 e extração de padrões/lógicas inéditas).
 3. **Encerrar a mensagem com o bloco estruturado de aprovação:**
    ```
    👁️ Micro Task Observer — Bloco [N]: [Nome do Bloco]
      • Sentido & Propósito: [Frase justificando o valor do bloco sem slop]
      • Touch & Mobile Affordance: [Garantido funcionamento sem hover em telas touch / min-height 44px]
      • Formulários & Links: [Validação estrita, WhatsApp direto api.whatsapp.com/send, cache TTL 2h, ou N/A]
+     • Normalização de Tokens (Anti-Frankenstein): [Padrão: patterns/[subpasta]/[arquivo] | Valores literais: ZERO (100% variáveis CSS de primitives.css/arquétipo)]
      • Anti-Patterns (AP-01 a AP-25): Zero violações detectadas (incluindo rota de fuga em login)
      • Linter Estático: 0 FAIL | X WARN
-     • Extração Imediata: [Lógica >40 linhas sugerida para patterns/js-modules/ ou N/A]
+     • Extração Imediata: [Identificado layout inédito ou lógica >40 linhas? Propor salvar na subpasta correta de patterns/ | ou N/A]
 
    Por favor, abra `[arquivo]` no seu navegador e valide o visual.
    Podemos avançar para o Bloco [N+1]: [Nome do Próximo Bloco]? (S/N)

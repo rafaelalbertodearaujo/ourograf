@@ -223,6 +223,18 @@ Estas regras são **inegociáveis** e devem ser aplicadas em todo bloco de códi
 - **Motivo:** Telas de toque não possuem mouse hover. Se a dica depender de `:hover`, o usuário mobile nunca saberá que a foto ou card é clicável/ampliável.
 - **Feedback Tátil & Acessibilidade:** Cards ou imagens que abrem modais devem conter `:active { transform: scale(0.985); }`, `role="button"`, `tabindex="0"` e suporte aos botões Enter e Espaço via teclado.
 
+### 2.15 Navegação Mobile Obrigatória (Padrão NAV-02: Tríade Canônica)
+- Ocultar `.nav-links` via `display: none` ou esconder o botão de conversão no mobile via `.desktop-only` sem prover navegação alternativa é **ESTRITAMENTE PROIBIDO**.
+- Toda navbar com links deve implementar a estrutura canônica mobile:
+  ```
+  [Logo / Marca]                [CTA Primário Compacto] [☰ Hambúrguer ≥ 44px]
+  ```
+- **Requisitos Inegociáveis:**
+  1. **CTA Sempre Visível:** O CTA de conversão nunca deve ser escondido dentro do menu hambúrguer. Em telas pequenas (< 480px), usar rótulo compacto (ex: `Reservar` em vez de `Reservar Mesa`) com touch target ≥ 44px.
+  2. **Gatilho Hambúrguer Acessível:** Mínimo de 44×44px, `aria-label="Abrir menu de navegação"`, `aria-expanded="false"`, `aria-controls="nav-mobile"`.
+  3. **Drawer de Navegação Mobile:** Fundo com `backdrop-filter: blur()`, altura travada em `100dvh` com safe areas, links com área de toque mínima de 44px, fechamento ao clicar em link, backdrop ou tecla `Escape`, e lock de scroll no `body` (`overflow: hidden`) enquanto aberto.
+  4. **Skip Link:** Primeiro elemento filho do `<body>` DEVE ser `<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>` com suporte a foco por teclado.
+
 ---
 
 ## 3. Tipografia e Acessibilidade
@@ -325,7 +337,7 @@ Estas regras são **inegociáveis** e devem ser aplicadas em todo bloco de códi
   ```
 - **Módulo Compartilhado:** Os helpers `escapeHtml` e `safeHref` estão centralizados no módulo compartilhado `sites/.design-system/utils.js` para importação via ES Modules (`import { escapeHtml, safeHref } from '../.design-system/utils.js'`).
 - **Painéis Administrativos (Stored XSS):** Painéis e dashboards que exibem agendamentos, nomes de clientes e observações enviadas publicamente pelo site DEVEM sanitizar todos os campos com `escapeHtml()` antes de gerar o HTML de tabelas e cards.
-- **Links Externos:** **SEMPRE** use `encodeURIComponent()` ao gerar links com parâmetros dinâmicos (ex: links `https://wa.me/PHONE?text=...`).
+- **Links Externos:** **SEMPRE** use `encodeURIComponent()` ao gerar links com parâmetros dinâmicos (ex: links `https://api.whatsapp.com/send?phone=PHONE&text=...`).
 - **Autenticação Front-End & Rate Limiting:** Telas de login ou modais de PIN administrativo DEVEM implementar bloqueio temporário (ex: 5 tentativas incorretas bloqueiam por 30s) para impedir ataques de força bruta no navegador persistido em `sessionStorage`.
 
 ### 4.4 Estados de Formulário (Proibição de alert())
@@ -572,14 +584,14 @@ Todo projeto DEVE ser submetido à auditoria estática automatizada antes de qua
 
 Para eliminar o "flash branco" e a sensação de lentidão entre páginas em sites Multi-Page:
 
-1. **Speculation Rules API:** Inclusão do bloco declarativo `<script type="speculationrules">` no `<head>` com `eagerness: "moderate"`, pré-renderizando páginas internas no hover sem custo excessivo de rede. (Ver receita em `native-2026-apis.md`).
+1. **Speculation Rules API:** Inclusão do bloco declarativo `<script type="speculationrules">` no `<head>` com `eagerness: "moderate"`, pré-renderizando páginas internas no hover sem custo excessivo de rede. (Ver receita em `premium-web-design/patterns/infra/native-2026-apis.md`).
 2. **Cross-Document View Transitions:** Declarar `@view-transition { navigation: auto; }` no CSS global com fallback obrigatório para `@media (prefers-reduced-motion: reduce)`.
 
 ---
 
 ## 12. GEO (Generative Engine Optimization) & Schemas JSON-LD
 
-Todo projeto entregue deve incluir o Schema.org canônico específico do seu nicho via `<script type="application/ld+json">`, conforme documentado em `geo-schema-catalog.md`:
+Todo projeto entregue deve incluir o Schema.org canônico específico do seu nicho via `<script type="application/ld+json">`, conforme documentado em `premium-web-design/patterns/infra/geo-schema-catalog.md`:
 - Saúde: `@type: "Dentist"` ou `"MedicalClinic"`.
 - B2B / Jurídico: `@type: "LegalService"` ou `"AccountingService"`.
 - Gastronomia: `@type: "Restaurant"` com `hasMenu` e horários.
@@ -621,12 +633,12 @@ Para garantir entregabilidade perfeita de mensagens multi-linha e evitar corrup�
 | `agency-flow.md` | Passo 5 (QA gate, checklist de padrões técnicos) |
 | `site-refactoring-engine/SKILL.md` | Seções 2 (mobile), 3 (acessibilidade), 3.5 (responsividade), 4 (segurança), 5 (favicons/SEO) |
 | `premium-web-design/SKILL.md` | Seção 5 (princípios mobile-first, touch targets, safe areas, segurança XSS) |
-| `premium-web-design/patterns/conversion.md` | Seções CONV-01 a CONV-06 (funis, CTAs, links WhatsApp e wizards) |
+| `premium-web-design/patterns/conversion/conversion.md` | Seções CONV-01 a CONV-06 (funis, CTAs, links WhatsApp e wizards) |
 | `premium-web-design/patterns/js-modules/module-multistep-form-wizard.md` | Wizard multi-etapa com Voltar, Cache TTL e WhatsApp direto |
 | `premium-web-design/patterns/js-modules/module-address-autocomplete.md` | Autocomplete com validação estrita de cidades |
-| `premium-web-design/patterns/native-2026-apis.md` | View Transitions, Speculation Rules, Scroll-Driven CSS, Popover API |
-| `premium-web-design/patterns/approved-js-libraries.md` | Matriz de micro-bibliotecas cliente autorizadas (<20KB) |
-| `premium-web-design/patterns/geo-schema-catalog.md` | Modelos canônicos de Schema JSON-LD para IAs |
+| `premium-web-design/patterns/infra/native-2026-apis.md` | View Transitions, Speculation Rules, Scroll-Driven CSS, Popover API |
+| `premium-web-design/patterns/infra/approved-js-libraries.md` | Matriz de micro-bibliotecas cliente autorizadas (<20KB) |
+| `premium-web-design/patterns/infra/geo-schema-catalog.md` | Modelos canônicos de Schema JSON-LD para IAs |
 | `premium-web-design/patterns/js-modules/module-whatsapp-utm-tracker.md` | Captura de UTMs, DataLayer e atribuição de conversão |
 | `premium-web-design (principles/ui-principles.md)` | Seção 5 (contraste WCAG), Seção 6 (unidades responsivas) |
 | `premium-web-design (principles/ux-principles.md)` | Seção 3 (feedback de estado), Seção 4 (affordances), Seção 5 (prevenção de erros) |

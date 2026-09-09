@@ -41,7 +41,7 @@ Este documento centraliza as ferramentas homologadas pela agência e as diretriz
 ---
 
 ### 📦 Micro-Bibliotecas Frontend Homologadas (Client-Side)
-> ⚠️ **Critério Rigoroso de Homologação:** Permitidas apenas se forem **< 20 KB (gzipped)**, **zero dependências**, **sem build step (npm)** e para resolver dores onde o Vanilla puro traz alto risco de bugs em dispositivos móveis (ex: inércia touch no Safari iOS ou máscaras de teclado virtual). Documentação em `premium-web-design/patterns/approved-js-libraries.md`.
+> ⚠️ **Critério Rigoroso de Homologação:** Permitidas apenas se forem **< 20 KB (gzipped)**, **zero dependências**, **sem build step (npm)** e para resolver dores onde o Vanilla puro traz alto risco de bugs em dispositivos móveis (ex: inércia touch no Safari iOS ou máscaras de teclado virtual). Documentação em `premium-web-design/patterns/infra/approved-js-libraries.md`.
 
 - **Splide.js**: Sliders touch e carrosséis com acessibilidade WCAG nativa.
 - **IMask.js**: Máscara restritiva de WhatsApp/Telefone brasileiro, CPF e moedas sem falhas de autocomplete.

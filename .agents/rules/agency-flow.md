@@ -29,10 +29,10 @@
 | v1.1.0 | 2026-08-28 | AGY   | Roteamento de contexto por etapa, checkpoint de raciocínio     |
 | v1.0.0 | 2026-01-01 | AGY   | Versão inicial do protocolo de orquestração                    |
 
-**RULE ENGINE VERSION ATUAL: v1.7.0**
-Para travar um projeto nesta versão, preencha `RULE_ENGINE_VERSION: v1.6.0` no BRIEFING.md do projeto.
+**RULE ENGINE VERSION ATUAL: v1.8.0**
+Para travar um projeto nesta versão, preencha `RULE_ENGINE_VERSION: v1.8.0` no BRIEFING.md do projeto.
 Se o BRIEFING.md do projeto tiver RULE_ENGINE_VERSION diferente da versão atual, a IA DEVE alertar o usuário
-antes de prosseguir: "⚠️ Este projeto está fixado na versão [X] das regras. A versão atual é v1.6.0.
+antes de prosseguir: "⚠️ Este projeto está fixado na versão [X] das regras. A versão atual é v1.8.0.
 Aplicar a atualização pode alterar comportamentos. Deseja atualizar o pin? (S/N)"
 -->
 
@@ -49,8 +49,8 @@ Esta regra determina o fluxo de trabalho e o comportamento da IA para o desenvol
 | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------- |
 | **Passo 1 — Scanner** | `project-setup-scanner/SKILL.md`, `BRIEFING.md` (local)                                                                        | Todos os outros                         |
 | **Passo 2 — Briefing**| `BRIEFING.md`, `BRIEFING-TEMPLATE.md` (se ausente)                                                                             | Skills de pesquisa e código             |
-| **Passo 3 — Research**| `research-driven-creation/SKILL.md`, skill `premium-web-design` (módulos em `principles/`, `patterns/`, `decision-records/`, `benchmarks/*.md`, `geo-schema-catalog.md`), `.design-system/modelos-backgrounds-aprovados.md` | `web-standards.md`, `development-flow.md` (ainda não) |
-| **Passo 4 — Coding**  | `development-flow.md` (seções 1 e 4), tokens do arquétipo (`primitives.css` + `archetypes/<X>.css`), `native-2026-apis.md`, `approved-js-libraries.md`, `module-whatsapp-utm-tracker.md`, `web-standards.md` seções 1-2 e 5.7 | `research-driven-creation/SKILL.md` (já concluída) |
+| **Passo 3 — Research / Engine**| `research-driven-creation/SKILL.md` (site novo) ou `site-refactoring-engine/SKILL.md` (refatoração), skill `premium-web-design` (módulos em `principles/`, subpastas de `patterns/`, `decision-records/`, `benchmarks/*.md`, `patterns/infra/geo-schema-catalog.md`), `.design-system/modelos-backgrounds-aprovados.md` | `web-standards.md`, `development-flow.md` (ainda não) |
+| **Passo 4 — Coding**  | `development-flow.md` (seções 1 e 4), tokens do arquétipo (`primitives.css` + `archetypes/<X>.css`), `patterns/infra/native-2026-apis.md`, `patterns/infra/approved-js-libraries.md`, `module-whatsapp-utm-tracker.md`, `web-standards.md` seções 1-2 e 5.7 | `research-driven-creation/SKILL.md` (já concluída) |
 | **Passo 5 — QA**      | `node .design-system/linter/static-qa.js`, `web-standards.md` (completo), checklists de UX/A11y Audit (seção 6 e 7 de `site-refactoring-engine/SKILL.md`) | Todos os arquivos de pesquisa           |
 | **Passo 6 — Fechar**  | `task-observer/SKILL.md`, `BRIEFING.md` seção "Feedback Pós-Lançamento", `font-registry.md`                                    | Skills de desenvolvimento               |
 
@@ -91,18 +91,19 @@ A IA executará sequencialmente estes passos integrados:
     2.  Preencher com os dados conhecidos e solicitar os faltantes ao usuário.
 
 ### Passo 3: Escolha da Engine de Trabalho & Arquitetura
-> **Contexto mínimo (Research):** `research-driven-creation/SKILL.md`, skill `premium-web-design` (`principles/*.md`, `patterns/*.md`, `benchmarks/cozinha-sil.md`, `benchmarks/space-refatorado.md`)
+> **Contexto mínimo (Research):** `research-driven-creation/SKILL.md`, skill `premium-web-design` (`principles/*.md`, subpastas de `patterns/`, `benchmarks/cozinha-sil.md`, `benchmarks/space.md`)
 Após ler o briefing local e analisar a pasta, a IA divide a ação em duas rotas possíveis:
 1.  **Site Novo (Sem código local ou pasta vazia):** A IA ativa a skill `research-driven-creation`.
     *   *Ação:* Executa a pesquisa de referências por perfis (pesquisa web real provada + combinação de conhecimento prévio), propõe o direcionamento estético e a **Arquitetura de Páginas** (Single-Page vs Multi-Page).
-    *   *Decisão de Arquitetura:* Sites complexos (restaurantes, e-commerce, barbearias com agendamento) devem ser estruturados como Multi-Page (ex: separar Home do Cardápio/Catálogo/Dashboard), seguindo os benchmarks de arquitetura e qualidade dos projetos `cozinha-sil` e `space-refatorado` documentados na skill `premium-web-design` (`benchmarks/`).
+    *   *Decisão de Arquitetura:* Sites complexos (restaurantes, e-commerce, barbearias com agendamento) devem ser estruturados como Multi-Page (ex: separar Home do Cardápio/Catálogo/Dashboard), seguindo os benchmarks de arquitetura e qualidade dos projetos `cozinha-sil` e `space` documentados na skill `premium-web-design` (`benchmarks/`).
     *   *Seleção entre os 16 Arquétipos Oficiais:* A IA DEVE selecionar o arquétipo mais aderente ao negócio entre os **16 arquétipos tokenizados** em `sites/.design-system/archetypes/` (ex: *13. Clinical Authority*, *14. Corporate Prestige*, *15. Architectural Monolith*, *16. Boutique B2B SaaS*, além dos gastronômicos e comerciais 1 a 12).
     *   *Check de Fontes & Superfícies:* A IA DEVE ler `sites/.design-system/font-registry.md` e escolher fontes display e body que não estejam saturadas (ex: proibir Outfit e DM Sans em excesso nos novos projetos). Para o direcionamento visual de superfícies, consultar `sites/.design-system/modelos-backgrounds-aprovados.md` como catálogo de inspiração contextual (cores sólidas são bem-vindas em blocos/seções; o que se combate é a monocultura escura chapada de ponta a ponta sem ritmo visual).
-    *   *Doutrina Anti-Slop (2026):* Consultar obrigatoriamente `web-standards.md` Seção 5.7 (AP-01 a AP-19) e a skill `premium-web-design` (`principles/anti-patterns.md`), injetando **Human-Crafted Cues** (quebras intencionais de grid, assimetria editorial, tipografia de duas vozes) e aplicando a Navalha de Ockham.
+    *   *Doutrina Anti-Slop (2026):* Consultar obrigatoriamente `web-standards.md` Seção 5.7 (AP-01 a AP-25) e a skill `premium-web-design` (`principles/anti-patterns.md`), injetando **Human-Crafted Cues** (quebras intencionais de grid, assimetria editorial, tipografia de duas vozes) e aplicando a Navalha de Ockham.
 2.  **Site Existente (Presença de código legado):** A IA ativa a skill `site-refactoring-engine`.
-    *   *Ação:* Cria o backup de segurança (`_legacy/` ou branch git) e executa o checklist de auditoria visual de slop, responsividade, acessibilidade e favicons.
+    *   *Ação:* Cria o backup de segurança (`_legacy/` ou branch git), executa o Diagnóstico Modular Cirúrgico (Passo 1.5) e audita slop, responsividade, acessibilidade e favicons.
+    *   *Pesquisa Modular de Benchmark (Passo 1.6):* Para qualquer seção classificada como (C) Substituição Recomendada, a IA executa a Pesquisa Modular de Benchmark orientada ao nicho antes de reescrever o bloco, unindo as melhores referências de mercado aos padrões canônicos da agência sob o Filtro Anti-Frankenstein.
     *   *Auditoria de Superfície:* Verificar o ritmo visual do site. Se for um bloco escuro monótono de ponta a ponta sem vida, propor enriquecimento com texturas adequadas ao nicho.
-    *   *Benchmark:* Os projetos `cozinha-sil` e `space-refatorado` são os pisos mínimos de qualidade estética, modularidade, tipografia e sobriedade aceitáveis para o ecossistema (ver skill `premium-web-design/benchmarks/`).
+    *   *Benchmark:* Os projetos `cozinha-sil` e `space` são os pisos mínimos de qualidade estética, modularidade, tipografia e sobriedade aceitáveis para o ecossistema (ver skill `premium-web-design/benchmarks/`).
 
 ### ✅ Gate de Pesquisa (Obrigatório antes de avançar para o Passo 4)
 
@@ -126,7 +127,7 @@ Antes de gerar qualquer bloco de código, a IA DEVE emitir visivelmente ao usuá
 ```
 ⚙️ Checkpoint — [Nome do Bloco]:
   Regras verificadas: tokens (--space-*) ✓ | touch target 44px ✓ | breakpoint 768px ✓ | 
-  fonte ≥16px ✓ | 100dvh ✓ | text-wrap: balance ✓ | anti-slop (AP-10 a AP-20) ✓ | 
+  fonte ≥16px ✓ | 100dvh ✓ | text-wrap: balance ✓ | anti-slop (AP-01 a AP-25) ✓ | 
   filtro subtrativo (zero bordismo, zero glow, hover calmo) ✓ | ritmo de superfície ✓ | font-registry.md consultado ✓
   Arquétipo ativo: [nome-do-arquetipo.css] (1 dos 16 arquivos CSS homologados)
   Tokens carregados: primitives.css ✓
@@ -134,7 +135,7 @@ Antes de gerar qualquer bloco de código, a IA DEVE emitir visivelmente ao usuá
 ```
 Se qualquer item estiver ✗, a IA deve resolver o bloqueio antes de gerar código.
 
-O item `anti-slop (AP-10 a AP-20) ✓` e `filtro subtrativo ✓` do Checkpoint exige que o agente:
+O item `anti-slop (AP-01 a AP-25) ✓` e `filtro subtrativo ✓` do Checkpoint exige que o agente:
 - Declare explicitamente por que o Hero não tem pill badge (AP-11) nem gradiente em texto (AP-17)
 - Declare explicitamente que não há bento grid homogêneo (AP-10) nem border-beam contínuo (AP-12)
 - Declare explicitamente que ícones em grids não são Squircles cinzas (AP-13)
@@ -144,7 +145,7 @@ O item `anti-slop (AP-10 a AP-20) ✓` e `filtro subtrativo ✓` do Checkpoint e
 - Declare explicitamente que a Hero Section NÃO usa o split 2-colunas SaaS (texto à esquerda + card/logo na direita) em gastronomia e produtos físicos (AP-20), adotando palco imersivo de apetite ou composição editorial.
 
 ### 🧹 Passo 4.1: O Filtro Subtrativo (A Navalha de Ockham)
-Antes de submeter o bloco ao usuário, a IA aplica o teste de subtração inspirado nos benchmarks `cozinha-sil` e `space-refatorado`:
+Antes de submeter o bloco ao usuário, a IA aplica o teste de subtração inspirado nos benchmarks `cozinha-sil` e `space`:
 1. *Se remover a borda de 1px o card continua claro pelo fundo?* $\rightarrow$ **Remover a borda.**
 2. *O card é meramente informativo?* $\rightarrow$ **Desligar hover translateY.**
 3. *O subtítulo só repete o título?* $\rightarrow$ **Deletar o subtítulo.**
@@ -161,11 +162,11 @@ Durante a codificação e na validação de cada seção, a IA aplica obrigatori
 *   **Zero Testes Automatizados de Navegador:** O QA visual é 100% analítico e a conferência visual final é delegada ao usuário no navegador dele.
 *   Importação obrigatória de `primitives.css` e do manifest de cores/arquétipo correspondente em `.design-system/archetypes/`.
 *   Garantia de Favicons em múltiplos formatos (SVG, ICO, PNG).
-*   Responsividade móvel inegociável (overflow-x, paddings laterais, alvos de toque 44x44px, fontes 16px mínimo, `100dvh` em heros/modais, `text-wrap: balance`).
+*   Responsividade móvel inegociável (overflow-x, paddings laterais, alvos de toque 44x44px, fontes 16px mínimo, `100dvh` em heros/modais, `text-wrap: balance`, tríade NAV-02 de navegação e CTA persistente).
 *   Lógica anti-double click de 1.5s em botões e máscara sanitizada de inputs.
 *   Acessibilidade vestibular: fallback obrigatório para `@media (prefers-reduced-motion: reduce)`.
 *   Segurança de integração (RLS no Supabase/Firebase, Turnstile anti-bot).
-*   Atribuição de conversão: inclusão obrigatória de `whatsapp-utm-tracker.js` e schemas JSON-LD (`geo-schema-catalog.md`).
+*   Atribuição de conversão: inclusão obrigatória de `whatsapp-utm-tracker.js` e schemas JSON-LD (`patterns/infra/geo-schema-catalog.md`).
 
 ### Passo 6: Fechamento, Notion Update, Task Observer & Higiene
 > **Contexto mínimo (Fechamento):** `task-observer/SKILL.md`, seção "Feedback Pós-Lançamento" do `BRIEFING.md`, `font-registry.md`
@@ -178,7 +179,7 @@ Ao concluir o projeto ou fases críticas:
 6.  **Verificação Empírica (Gate de Encerramento):** A IA é PROIBIDA de declarar o projeto como "concluído" ou "pronto" sem executar o Checklist de Fechamento do `task-observer/SKILL.md` seção 6 e apresentar as provas ao usuário. Se qualquer item do checklist falhar, o projeto NÃO está concluído e a IA deve informar quais itens falharam e propor a correção.
 7.  **Garbage Collection (Limpeza Obrigatória de Contexto):** Ao encerrar qualquer projeto ou refatoração de regras, a IA deve verificar se existem:
     - Arquivos `.md` ou `.txt` soltos na raiz de `sites/` que não sejam `BRIEFING-TEMPLATE.md`, `arquitetura-ecossistema.md` ou `contexto.md` ativo → Mover para `sites/.archive/`
-    - Arquivos soltos dentro de `.design-system/` que não sejam `primitives.css`, `font-registry.md` ou subpastas `archetypes/` → Mover para `sites/.archive/`
+    - Arquivos soltos dentro de `.design-system/` que não sejam `primitives.css`, `font-registry.md`, `utils.js`, `modelos-backgrounds-aprovados.md` ou as subpastas `archetypes/` e `linter/` → Mover para `sites/.archive/`
     - Skills em `~/.gemini/config/skills/` que não são referenciadas em nenhum Hook nem no `agency-flow.md` → Reportar como `⚠️ SKILL ÓRFÃ`.
 
 ---
